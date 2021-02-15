@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./App.css";
 
 interface User {
@@ -8,14 +8,15 @@ interface User {
   token: string;
 }
 
+export const AuthContext = React.createContext<User | undefined>(undefined);
+
 function useAuth() {
-  if (window.localStorage.getItem("__auth_provider_token"))
-    return { id: 1, name: "bb", email: "3432@qq.com", token: "valid-token" };
-  return;
+  const authContext = useContext(AuthContext);
+  return authContext;
 }
 
 function App() {
-  const user: (User | undefined) = useAuth();
+  const user: User | undefined = useAuth();
   return (
     <div className="App">
       {user ? (
