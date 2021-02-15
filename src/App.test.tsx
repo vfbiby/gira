@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import App, { AuthContext } from "./App";
+import App  from "./App";
+import {AuthProvider} from "./context/auth-context";
 
 describe("Unauthenticated", () => {
   it("should show login page default", () => {
@@ -14,16 +15,9 @@ describe("Authenticated", () => {
   it("should render authorized page", () => {
     window.localStorage.setItem("__auth_provider_token", "token-user-bb");
     render(
-      <AuthContext.Provider
-        value={{
-          id: 1,
-          name: "bb",
-          email: "3432@qq.com",
-          token: "valid-token",
-        }}
-      >
+      <AuthProvider>
         <App />
-      </AuthContext.Provider>
+      </AuthProvider>
     );
     expect(screen.getByText("Welcome bb")).toBeInTheDocument();
   });

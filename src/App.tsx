@@ -1,19 +1,6 @@
-import React, { useContext } from "react";
 import "./App.css";
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  token: string;
-}
-
-export const AuthContext = React.createContext<User | undefined>(undefined);
-
-function useAuth() {
-  const authContext = useContext(AuthContext);
-  return authContext;
-}
+import { User } from "./context/auth-context";
+import { useAuth } from "./utils/hooks";
 
 function App() {
   const user: User | undefined = useAuth();
