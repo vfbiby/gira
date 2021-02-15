@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { useUser } from "../utils/hooks";
 
 export interface User {
   id: number;
@@ -10,16 +11,17 @@ export interface User {
 export const AuthContext = React.createContext<User | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  return (
-    <AuthContext.Provider
-      value={{
+  const { user, run } = useUser<User | undefined>();
+  React.useEffect(() => {
+    const userPro = async () => {
+      return {
         id: 1,
         name: "bb",
         email: "3432@qq.com",
         token: "valid-token",
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+      } as User;
+    };
+    run(userPro());
+  }, []);
+  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 };

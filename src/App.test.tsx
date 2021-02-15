@@ -1,7 +1,7 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import App  from "./App";
-import {AuthProvider} from "./context/auth-context";
+import { render, screen, waitFor } from "@testing-library/react";
+import App from "./App";
+import { AuthProvider } from "./context/auth-context";
 
 describe("Unauthenticated", () => {
   it("should show login page default", () => {
@@ -12,14 +12,16 @@ describe("Unauthenticated", () => {
 });
 
 describe("Authenticated", () => {
-  it("should render authorized page", () => {
+  it("should render authorized page", async () => {
     window.localStorage.setItem("__auth_provider_token", "token-user-bb");
     render(
       <AuthProvider>
         <App />
       </AuthProvider>
     );
-    expect(screen.getByText("Welcome bb")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("Welcome bb")).toBeInTheDocument();
+    });
   });
 
   beforeEach(() => {
