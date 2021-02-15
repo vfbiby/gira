@@ -12,16 +12,14 @@ describe("Unauthenticated", () => {
 
 describe("Authenticated", () => {
   it("should render authorized page", () => {
+    window.localStorage.setItem('__auth_provider_token', 'valid-token')
     render(
-      <App
-        user={{
-          id: 1,
-          name: "bb",
-          email: "7599@qq.com",
-          token: "valid-token",
-        }}
-      />
+      <App />
     );
     expect(screen.getByText("Welcome bb")).toBeInTheDocument();
   });
+
+  beforeEach(()=>{
+    window.localStorage.removeItem('__auth_provider_token')
+  })
 });
