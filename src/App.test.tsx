@@ -13,6 +13,7 @@ describe("Unauthenticated", () => {
 
 describe("Authenticated", () => {
   it("should render authorized page", async () => {
+
     //const nock = require("nock");
     //nock("http://localhost").get("/me").reply(200, {
       //id: 1,

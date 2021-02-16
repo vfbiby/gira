@@ -8,9 +8,10 @@ export const handlers = [
   }),
 
   rest.get("http://localhost/me", (req, res, ctx) => {
-    const isAuthenticated = !!sessionStorage.getItem("is-authenticated") || true;
+    const { authorization } = req.headers.getAllHeaders();
+    //const isAuthenticated = !!sessionStorage.getItem("is-authenticated") || true;
 
-    if (!isAuthenticated) {
+    if (!authorization) {
       return res(
         ctx.status(403),
         ctx.json({

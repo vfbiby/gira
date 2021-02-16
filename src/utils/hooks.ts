@@ -6,7 +6,7 @@ export function useAuth() {
   return authContext;
 }
 
-export function useUser<D>(initialUser?: D) {
+export function useAsync<D>(initialUser?: D) {
   const [user, setUser] = useState(initialUser);
   const run = async (promise: Promise<D>): Promise<any> => {
     return promise.then((response) => {
