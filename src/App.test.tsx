@@ -28,7 +28,4 @@ describe("Authenticated", () => {
       expect(screen.getByText("Welcome bb")).toBeInTheDocument();
     });
   });
-  beforeEach(() => {
-    window.localStorage.removeItem("__auth_provider_token");
-  });
 });
