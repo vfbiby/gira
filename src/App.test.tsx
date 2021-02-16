@@ -4,8 +4,12 @@ import App from "./App";
 import { AuthProvider } from "./context/auth-context";
 
 describe("Unauthenticated", () => {
-  it("should show login page default", async () => {
-    render(<App />);
+  it("should show login page if there is no token in localStorage", () => {
+    render(
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    );
     expect(screen.getByText("Username")).toBeInTheDocument();
     expect(screen.getByText("Password")).toBeInTheDocument();
   });
