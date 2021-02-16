@@ -17,7 +17,7 @@ describe("Unauthenticated", () => {
 });
 
 describe("Authenticated", () => {
-  it("should render authorized page", async () => {
+  it("should render authorized page when token is valid", async () => {
     window.localStorage.setItem(localStorageKey, "token-user-bb");
     render(
       <AuthProvider>

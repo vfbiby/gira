@@ -13,7 +13,7 @@ export const handlers = [
 
     if (!authorization) {
       return res(
-        ctx.status(403),
+        ctx.status(401),
         ctx.json({
           errorMessage: "Not authorized",
         })
