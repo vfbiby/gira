@@ -13,7 +13,14 @@ describe("Unauthenticated", () => {
 
 describe("Authenticated", () => {
   it("should render authorized page", async () => {
-    window.localStorage.setItem("__auth_provider_token", "token-user-bb");
+    //const nock = require("nock");
+    //nock("http://localhost").get("/me").reply(200, {
+      //id: 1,
+      //name: "bb",
+      //email: "3432@qq.com",
+      //token: "valid-token",
+    //});
+    //window.localStorage.setItem("__auth_provider_token", "token-user-bb");
     render(
       <AuthProvider>
         <App />
