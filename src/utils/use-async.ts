@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useMountedRef } from "./use-mountedRef";
 
 export function useAsync<D>(initialUser?: D) {
-  const [user, setUser] = useState(initialUser);
+  const [user, setUser] = useState<D | null>(initialUser || null);
   const mountedRef = useMountedRef();
   const run = async (promise: Promise<D>): Promise<any> => {
     return promise
