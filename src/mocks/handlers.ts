@@ -7,7 +7,7 @@ export const handlers = [
     return res(ctx.status(200));
   }),
 
-  rest.get("http://localhost/me", (req, res, ctx) => {
+  rest.get("/me", (req, res, ctx) => {
     const { authorization } = req.headers.getAllHeaders();
     //const isAuthenticated = !!sessionStorage.getItem("is-authenticated") || true;
 
