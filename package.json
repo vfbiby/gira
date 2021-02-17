@@ -43,11 +43,15 @@
     ]
   },
   "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.0.3",
     "@types/testing-library__jest-dom": "^5.9.5",
     "@types/testing-library__react": "^10.2.0",
+    "autoprefixer": "^9",
     "msw": "^0.26.2",
     "nock": "^13.0.7",
+    "postcss": "^7",
     "prettier": "^2.2.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "ts-jest": "^26.5.1"
   }
 }

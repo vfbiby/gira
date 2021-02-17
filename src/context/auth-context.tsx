@@ -10,7 +10,7 @@ export interface User {
   token: string;
 }
 
-export const AuthContext = React.createContext<User | undefined>(undefined);
+export const AuthContext = React.createContext<User | null | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { user, run } = useAsync<User | undefined>();
