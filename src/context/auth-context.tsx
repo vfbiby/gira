@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import * as Auth from "../auth-provider";
 import { client } from "../utils/api-client";
-import { useAsync } from "../utils/hooks";
+import { useAsync } from "../utils/use-async";
 
 export interface User {
   id: number;
