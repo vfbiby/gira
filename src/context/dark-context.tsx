@@ -1,12 +1,14 @@
 import React, { ReactNode, useContext, useEffect } from "react";
-import { useDarkMode } from "../utils/use-darkMode";
+import { darkModeKey, useDarkMode } from "../utils/use-darkMode";
 
 interface ThemeContextProps {
   isDark: boolean;
   setDark: (isDark: boolean) => void;
 }
 
-export const ThemeContext = React.createContext<ThemeContextProps | undefined>(undefined);
+export const ThemeContext = React.createContext<ThemeContextProps | undefined>(
+  undefined
+);
 
 export const DarkProvider = ({ children }: { children: ReactNode }) => {
   const { darkMode, setDarkMode } = useDarkMode();
@@ -18,7 +20,7 @@ export const DarkProvider = ({ children }: { children: ReactNode }) => {
   }, [darkMode]);
 
   const setDark = (isDark: boolean) => {
-    console.log('setDark');
+    localStorage.setItem(darkModeKey, `${isDark}`);
     setDarkMode(isDark);
   };
 

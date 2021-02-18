@@ -1,13 +1,11 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { mockSystemPrefersColorThemeTo } from "../mocks/mock-lib";
-import { useDarkMode } from "./use-darkMode";
+import { darkModeKey, useDarkMode } from "./use-darkMode";
 
 describe("useDarkMode", () => {
   beforeEach(() => {
     mockSystemPrefersColorThemeTo(false);
-  });
-  afterEach(() => {
-    localStorage.removeItem("theme");
+    localStorage.removeItem(darkModeKey);
   });
 
   it("should return false by default", () => {
@@ -16,7 +14,7 @@ describe("useDarkMode", () => {
   });
 
   it("should return true when localStorage has dark", function () {
-    window.localStorage.setItem("theme", "dark");
+    window.localStorage.setItem(darkModeKey, "true");
     const { result } = renderHook(() => useDarkMode());
     expect(result.current.darkMode).toBe(true);
   });
@@ -27,5 +25,10 @@ describe("useDarkMode", () => {
     expect(result.current.darkMode).toBe(true);
   });
 
-  it("should return true if localStorage is set to light but system is in darkMode", function () {});
+  it("should return false because localStorage has high priority then system darkMode", function () {
+    mockSystemPrefersColorThemeTo(true);
+    window.localStorage.setItem(darkModeKey, "false");
+    const { result } = renderHook(() => useDarkMode());
+    expect(result.current.darkMode).toBe(false);
+  });
 });
