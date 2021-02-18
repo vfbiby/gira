@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import { useAuth } from "./utils/hooks";
 import {useDarkMode} from "./utils/use-darkMode";

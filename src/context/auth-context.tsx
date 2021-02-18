@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { user, run } = useAsync<User | undefined>();
   React.useEffect(() => {
     let token = Auth.getToken();
-    run(client("http://localhost/me", { token }));
+    run(client("/me", { token }));
   }, []);
   return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 };
