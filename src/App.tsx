@@ -1,10 +1,10 @@
 import "./App.css";
-import { useTheme } from "./context/dark-context";
+import { useDarkTheme } from "./context/dark-context";
 import { useAuth } from "./utils/hooks";
 
 function App() {
   const user = useAuth();
-  const theme = useTheme();
+  const darkTheme = useDarkTheme();
 
   return (
     <div className="dark:bg-gray-700 App">
@@ -18,7 +18,7 @@ function App() {
             type="button"
             className="px-2 py-1 rounded-lg"
             onClick={() => {
-              theme?.setDark(!theme.isDark);
+              darkTheme?.setDark(!darkTheme.isDark);
             }}
           >
             Dark mode

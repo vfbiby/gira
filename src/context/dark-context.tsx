@@ -36,7 +36,7 @@ export const DarkProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useTheme = () => {
+export const useDarkTheme = () => {
   const themesContext = useContext(ThemeContext);
   if (themesContext === undefined) {
     throw new Error("useTheme must be wrapped in ThemeContext");
