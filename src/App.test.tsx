@@ -3,8 +3,12 @@ import { render, screen, waitFor } from "@testing-library/react";
 import App from "./App";
 import { AuthProvider } from "./context/auth-context";
 import { localStorageKey } from "./auth-provider";
+import {mockSystemPrefersColorThemeTo} from "./mocks/mock-lib";
 
 describe("Unauthenticated", () => {
+  beforeEach(() => {
+    mockSystemPrefersColorThemeTo(true);
+  });
   it("should show login page if there is no token in localStorage", async () => {
     render(
       <AuthProvider>
@@ -17,6 +21,9 @@ describe("Unauthenticated", () => {
 });
 
 describe("Authenticated", () => {
+  beforeEach(() => {
+    mockSystemPrefersColorThemeTo(true);
+  });
   it("should render authorized page when token is valid", async () => {
     window.localStorage.setItem(localStorageKey, "token-user-bb");
     render(

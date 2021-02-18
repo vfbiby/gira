@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { useAuth } from "./utils/hooks";
+import {useDarkMode} from "./utils/use-darkMode";
 
 function App() {
   const user = useAuth();
-  const [darkMode, setDarkMode] = React.useState(false);
+  const {darkMode, setDarkMode} = useDarkMode();
 
-  React.useEffect(() => {
+  useEffect(() => {
     darkMode
       ? document.documentElement.classList.add("dark")
       : document.documentElement.classList.remove("dark");
   }, [darkMode]);
+
   return (
     <div className="dark:bg-gray-700 App">
       {user ? (
