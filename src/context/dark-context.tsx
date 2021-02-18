@@ -36,6 +36,7 @@ export const DarkProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// this hook is covered by dark-context.test.tsx
 export const useDarkTheme = () => {
   const themesContext = useContext(ThemeContext);
   if (themesContext === undefined) {
