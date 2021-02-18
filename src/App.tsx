@@ -1,17 +1,10 @@
-import { useEffect } from "react";
 import "./App.css";
+import { useTheme } from "./context/dark-context";
 import { useAuth } from "./utils/hooks";
-import {useDarkMode} from "./utils/use-darkMode";
 
 function App() {
   const user = useAuth();
-  const {darkMode, setDarkMode} = useDarkMode();
-
-  useEffect(() => {
-    darkMode
-      ? document.documentElement.classList.add("dark")
-      : document.documentElement.classList.remove("dark");
-  }, [darkMode]);
+  const theme = useTheme();
 
   return (
     <div className="dark:bg-gray-700 App">
@@ -24,7 +17,9 @@ function App() {
           <button
             type="button"
             className="px-2 py-1 rounded-lg"
-            onClick={() => setDarkMode(!darkMode)}
+            onClick={() => {
+              theme?.setDark(!theme.isDark);
+            }}
           >
             Dark mode
           </button>
