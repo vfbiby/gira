@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { localStorageKey } from "./auth-provider";
 import { useDarkTheme } from "./context/dark-context";
 
 interface LoginFormProps {
@@ -10,6 +11,7 @@ export const LoginForm = () => {
   const { register, handleSubmit, errors } = useForm<LoginFormProps>();
   const onSubmit = (data: any) => {
     console.log(data);
+    localStorage.setItem(localStorageKey, "valid-token");
   };
 
   return (
@@ -49,7 +51,7 @@ export const LoginForm = () => {
       </div>
       <input
         className="w-full py-4 mt-10 tracking-widest text-white uppercase bg-pink-500 rounded"
-        style={{ letterSpacing: '0.6rem' }}
+        style={{ letterSpacing: "0.6rem" }}
         type="submit"
       />
     </form>

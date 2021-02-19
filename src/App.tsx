@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import AuthenticatedApp from "./authenticated";
 import UnauthenticatedApp from "./unauthenticated";
 import { useAuth } from "./utils/hooks";
 
@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="dark:bg-gray-900">
-      {user ? <div>Welcome {user.name}</div> : <UnauthenticatedApp />}
+      {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
     </div>
   );
 }
