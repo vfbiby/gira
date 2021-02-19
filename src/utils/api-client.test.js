@@ -27,9 +27,7 @@ describe("Api-client", () => {
     expect(result).toStrictEqual({
       status: 200,
       data: {
-        id: 1,
-        name: "bb",
-        email: "3432@qq.com",
+        user: { id: 1, name: "bb", email: "3432@qq.com" },
         token: "valid-token",
       },
     });
