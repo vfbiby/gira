@@ -6,13 +6,6 @@ interface LoginBody {
   password: string;
 }
 
-interface LoginResponse {
-  id: number;
-  name: string;
-  email: string;
-  token: string;
-}
-
 export const handlers = [
   rest.post<LoginBody>("/login", (req, res, ctx) => {
     const { username, password } = req.body;

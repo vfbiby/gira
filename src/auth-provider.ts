@@ -9,7 +9,8 @@ const handleUserResponsed = ({
   user: User;
   token: string;
 }) => {
-  localStorage.setItem(localStorageKey, token);
+  localStorage.setItem(localStorageKey, token || "");
+  console.log(user);
   return user;
 };
 
@@ -21,7 +22,8 @@ export const login = async (data: Form) => {
     },
     body: JSON.stringify(data),
   }).then(async (response: Response) => {
-    return handleUserResponsed(await response.json());
+    let data = await response.json();
+    return handleUserResponsed(data["data"]);
   });
 };
 
