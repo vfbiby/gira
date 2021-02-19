@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { client } from "utils/api-client";
 import { localStorageKey } from "./auth-provider";
 import { useDarkTheme } from "./context/dark-context";
 
@@ -9,9 +10,10 @@ interface LoginFormProps {
 
 export const LoginForm = () => {
   const { register, handleSubmit, errors } = useForm<LoginFormProps>();
-  const onSubmit = (data: any) => {
-    console.log(data);
-    localStorage.setItem(localStorageKey, "valid-token");
+  const onSubmit = (data: LoginFormProps) => {
+    client("/login", { data, method: "POST" }).then((res) => {
+      localStorage.setItem(localStorageKey, res.data.token);
+    });
   };
 
   return (

@@ -7,13 +7,11 @@ const AuthenticatedApp = React.lazy(
 const UnauthenticatedApp = React.lazy(() => import("./unauthenticated"));
 
 const FullPageSpinner = () => {
-  return (
-    <div className="absolute inset-0 z-10">loading</div>
-  )
-}
+  return <div className="absolute inset-0 z-10">loading</div>;
+};
 
 function App() {
-  const user = useAuth();
+  const { user } = useAuth();
 
   return (
     <React.Suspense fallback={<FullPageSpinner />}>

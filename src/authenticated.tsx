@@ -2,7 +2,7 @@ import { useDarkTheme } from "./context/dark-context";
 import { useAuth } from "./utils/hooks";
 
 const AuthenticatedApp = () => {
-    const user = useAuth();
+    const { user } = useAuth();
     const darkTheme = useDarkTheme();
 
     return (
