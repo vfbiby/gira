@@ -19,10 +19,13 @@ export const handlers = [
     if (username === "vf" && password === "bb") {
       return res(
         ctx.json({
-          id: 1,
-          name: "bb",
-          email: "3432@qq.com",
-          token: "valid-token",
+          status: 200,
+          data: {
+            id: 1,
+            name: "bb",
+            email: "3432@qq.com",
+            token: "valid-token",
+          },
         })
       );
     }

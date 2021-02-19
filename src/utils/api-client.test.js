@@ -25,10 +25,13 @@ describe("Api-client", () => {
       data: { username: "vf", password: "bb" },
     }).then();
     expect(result).toStrictEqual({
-      id: 1,
-      name: "bb",
-      email: "3432@qq.com",
-      token: "valid-token",
+      status: 200,
+      data: {
+        id: 1,
+        name: "bb",
+        email: "3432@qq.com",
+        token: "valid-token",
+      },
     });
   });
 
