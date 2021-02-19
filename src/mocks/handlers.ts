@@ -30,6 +30,15 @@ export const handlers = [
     return res(ctx.json({ message: "hello world!" }));
   }),
 
+  rest.get("/getForTest", (req, res, ctx) => {
+    const user_id = req.url.searchParams.get("user_id");
+    return res(
+      ctx.json({
+        user_id,
+      })
+    );
+  }),
+
   rest.get("/me", (req, res, ctx) => {
     const { authorization } = req.headers.getAllHeaders();
     //const isAuthenticated = !!sessionStorage.getItem("is-authenticated") || true;

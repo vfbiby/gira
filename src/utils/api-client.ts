@@ -1,4 +1,5 @@
 import * as Auth from "../auth-provider";
+import qs from "qs";
 
 interface Config extends RequestInit {
   token?: string;
@@ -18,7 +19,11 @@ export const client = async (
     ...restConfig,
   };
 
-  defaultConfig.body = JSON.stringify(data);
+  if (defaultConfig.method.toUpperCase() === "GET") {
+    endpoint += `?${qs.stringify(data)}`;
+  } else {
+    defaultConfig.body = JSON.stringify(data);
+  }
 
   return window.fetch(endpoint, defaultConfig).then(async (response) => {
     if (response.status === 401) {
