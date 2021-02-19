@@ -1,6 +1,4 @@
 import React from "react";
-//import AuthenticatedApp from "./authenticated";
-//import UnauthenticatedApp from "./unauthenticated";
 import { useAuth } from "./utils/hooks";
 
 const AuthenticatedApp = React.lazy(

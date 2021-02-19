@@ -4,7 +4,7 @@ import App from "./App";
 import { AuthProvider } from "./context/auth-context";
 import { localStorageKey } from "./auth-provider";
 import { mockSystemPrefersColorThemeTo } from "./mocks/mock-lib";
-import {DarkProvider} from "./context/dark-context";
+import { DarkProvider } from "./context/dark-context";
 
 describe("Unauthenticated", () => {
   beforeEach(() => {
@@ -18,8 +18,10 @@ describe("Unauthenticated", () => {
         </AuthProvider>
       </DarkProvider>
     );
-    expect(screen.getByText("Username")).toBeInTheDocument();
-    expect(screen.getByText("Password")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("Username")).toBeInTheDocument();
+      expect(screen.getByText("Password")).toBeInTheDocument();
+    });
   });
 });
 
