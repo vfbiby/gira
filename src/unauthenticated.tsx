@@ -15,8 +15,8 @@ export const LoginForm = () => {
   };
 
   return (
-    <form className="max-w-lg" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col mt-3" style={{ width: "500px" }}>
+    <form className="w-full p-2 sm:max-w-lg" onSubmit={handleSubmit(onSubmit)}>
+      <div className="flex flex-col mt-3">
         <label
           className="w-full py-3 text-gray-900 dark:text-white"
           htmlFor="username"
@@ -61,7 +61,7 @@ export const LoginForm = () => {
 const UnauthenticatedApp = () => {
   const darkTheme = useDarkTheme();
   return (
-    <div className="flex flex-col items-center w-full h-screen min-h-full pb-4 mx-auto">
+    <div className="flex flex-col items-center w-full h-screen min-h-full mx-auto">
       <LoginForm />
       <div className="w-full">
         <button

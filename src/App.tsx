@@ -1,15 +1,28 @@
 import React from "react";
-import AuthenticatedApp from "./authenticated";
-import UnauthenticatedApp from "./unauthenticated";
+//import AuthenticatedApp from "./authenticated";
+//import UnauthenticatedApp from "./unauthenticated";
 import { useAuth } from "./utils/hooks";
+
+const AuthenticatedApp = React.lazy(
+  () => import(/* webpackPrefetch: true */ "./authenticated")
+);
+const UnauthenticatedApp = React.lazy(() => import("./unauthenticated"));
+
+const FullPageSpinner = () => {
+  return (
+    <div className="absolute inset-0 z-10">loading</div>
+  )
+}
 
 function App() {
   const user = useAuth();
 
   return (
-    <div className="dark:bg-gray-900">
-      {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
-    </div>
+    <React.Suspense fallback={<FullPageSpinner />}>
+      <div className="dark:bg-gray-900">
+        {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+      </div>
+    </React.Suspense>
   );
 }
 
