@@ -29,8 +29,14 @@ export const handlers = [
         })
       );
     }
-    sessionStorage.setItem("is-authenticated", "true");
-    return res(ctx.json({ message: "hello world!" }));
+    //sessionStorage.setItem("is-authenticated", "true");
+    return res(
+      ctx.json({
+        status: 401,
+        errors: [],
+        message: "username or password is wrong!",
+      })
+    );
   }),
 
   rest.get("/getForTest", (req, res, ctx) => {
