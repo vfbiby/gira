@@ -31,6 +31,6 @@ export function getToken() {
   return window.localStorage.getItem(localStorageKey) || undefined;
 }
 
-export function logout() {
+export async function logout() {
   window.localStorage.removeItem(localStorageKey);
 }

@@ -16,20 +16,26 @@ export interface Form {
 }
 
 export const AuthContext = React.createContext<
-  { user: User | null; login: (form: Form) => Promise<void> } | undefined
+  | {
+      user: User | null;
+      login: (form: Form) => Promise<void>;
+      logout: () => void;
+    }
+  | undefined
 >(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const { user, run, setData: setUser } = useAsync<User>();
+  const { user, run, setData: setUser } = useAsync<User | null>();
 
   const login = (form: Form) => Auth.login(form).then(setUser);
+  const logout = () => Auth.logout().then(() => setUser(null));
 
   React.useEffect(() => {
     let token = Auth.getToken();
     run(client("/me", { token }));
   }, []);
   return (
-    <AuthContext.Provider value={{ user, login }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
