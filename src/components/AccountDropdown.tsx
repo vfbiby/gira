@@ -1,7 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const AccountDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const handleEscape = (e: KeyboardEvent) => {
+    if (e.key === "Esc" || e.key === "Escape") {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   return (
     <div className="relative">
@@ -9,13 +21,21 @@ const AccountDropdown = () => {
         onClick={() => {
           setIsOpen(!isOpen);
         }}
-        className="block object-cover w-8 h-8 overflow-hidden border-2 border-gray-600 rounded-full focus:border-white focus:outline-none"
+        className="relative z-10 block object-cover w-8 h-8 overflow-hidden border-2 border-gray-600 rounded-full focus:border-white focus:outline-none"
       >
         <img
           className="object-cover w-full h-full"
           src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1502&q=80"
         />
       </button>
+      <button
+        onClick={() => {
+          setIsOpen(!isOpen);
+        }}
+        className={`${
+          isOpen ? "block" : "hidden"
+        } fixed inset-0 w-full cursor-default h-full bg-black opacity-30`}
+      ></button>
       <div
         className={`${
           isOpen ? "block" : "hidden"
