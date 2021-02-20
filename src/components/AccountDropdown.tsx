@@ -51,16 +51,16 @@ const AccountDropdown = () => {
       <div
         className={`${
           isOpen ? "block" : "hidden"
-        } absolute right-0 w-48 py-2 mt-1 bg-white rounded-lg shadow-md`}
+        } absolute dark:bg-gray-800 right-0 w-48 py-2 mt-1 bg-white rounded-lg shadow-md`}
       >
         <a
-          className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
+          className="block px-4 py-2 text-gray-800 dark:text-white hover:bg-indigo-500 hover:text-white"
           href="#"
         >
           Account setting
         </a>
         <a
-          className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
+          className="block px-4 py-2 text-gray-800 dark:text-white hover:bg-indigo-500 hover:text-white"
           href="#"
         >
           Support
@@ -70,7 +70,7 @@ const AccountDropdown = () => {
             setIsOpen(false);
             logout();
           }}
-          className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
+          className="block px-4 py-2 dark:text-white text-gray-800 hover:bg-indigo-500 hover:text-white"
           href="#"
         >
           Sign out
