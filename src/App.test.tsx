@@ -39,7 +39,7 @@ describe("Authenticated", () => {
       </DarkProvider>
     );
     await waitFor(() => {
-      expect(screen.getByText("Welcome bb")).toBeInTheDocument();
+      expect(screen.getByText("bb")).toBeInTheDocument();
     });
   });
 });
