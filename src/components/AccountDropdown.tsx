@@ -20,11 +20,9 @@ const AccountDropdown = () => {
   return (
     <div className="relative">
       <div className="flex items-center">
-        <div>
+        <div className="dark:text-white">
           Welcome,{" "}
-          <span className="font-semibold uppercase tracking">
-            {user?.name}
-          </span>
+          <span className="font-semibold uppercase tracking">{user?.name}</span>
         </div>
         <button
           onClick={() => {
@@ -34,7 +32,11 @@ const AccountDropdown = () => {
         >
           <img
             className="object-cover w-full h-full"
-            src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1502&q=80"
+            src={`${
+              user?.avator_url
+                ? user?.avator_url
+                : "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1502&q=80"
+            }`}
           />
         </button>
       </div>

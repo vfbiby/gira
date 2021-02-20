@@ -14,7 +14,13 @@ export const handlers = [
         ctx.json({
           status: 200,
           data: {
-            user: { id: 1, name: "bb", email: "3432@qq.com" },
+            user: {
+              id: 1,
+              name: "bb",
+              email: "3432@qq.com",
+              avator_url:
+                "https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLy3Vy8eiaLz8aDCIktUfcqpW1fIfv8w6DX0krO2NcA0SpgN7XwembK8Kk5TNtt6ZDDJkeazDy3OBA/132",
+            },
             token: "valid-token",
           },
         })
