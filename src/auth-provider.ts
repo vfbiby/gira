@@ -10,7 +10,6 @@ const handleUserResponsed = ({
   token: string;
 }) => {
   localStorage.setItem(localStorageKey, token || "");
-  console.log(user);
   return user;
 };
 

@@ -6,7 +6,7 @@ import { ErrorBoundary } from "./error-boundary";
 describe("Error boundary", () => {
   beforeEach(() => {
     //console.error = jest.fn();
-    console.log = jest.fn();
+    //console.log = jest.fn();
     jest.spyOn(global.console, "error").mockImplementation(() => {});
   });
 
