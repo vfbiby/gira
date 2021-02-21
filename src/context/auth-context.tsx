@@ -1,3 +1,4 @@
+import { FullPageSpinner } from "App";
 import React, { ReactNode } from "react";
 import * as Auth from "../auth-provider";
 import { client } from "../utils/api-client";
@@ -26,7 +27,7 @@ export const AuthContext = React.createContext<
 >(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const { data: user, run, setData: setUser } = useAsync<User | null>();
+  const { data: user, isIdle, isLoading, run, setData: setUser } = useAsync<User | null>();
 
   const login = (form: Form) => Auth.login(form).then(setUser);
   const logout = () => Auth.logout().then(() => setUser(null));
@@ -35,6 +36,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     let token = Auth.getToken();
     run(client("/me", { token }));
   }, []);
+
+  if (isIdle || isLoading) {
+    return <FullPageSpinner />;
+  }
+
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       {children}
