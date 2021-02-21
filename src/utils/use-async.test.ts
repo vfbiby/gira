@@ -33,6 +33,23 @@ describe("use Async", () => {
       });
       expect(result.current.data).toStrictEqual("ok");
     });
+
+    it("should erase error and set data when a failure useAsync turn into success",  () => {
+      const { result } = renderHook(() => useAsync());
+      act(() => {
+        result.current.setError(new Error("some errors founded"));
+      });
+      expect(result.current.data).toStrictEqual(null);
+      expect(result.current.error).toStrictEqual(new Error("some errors founded"));
+
+      act(() => {
+        result.current.setData("ok");
+      });
+
+      expect(result.current.isError).toBe(false);
+      expect(result.current.data).toStrictEqual('ok');
+      expect(result.current.error).toStrictEqual(null);
+    });
   });
 
   describe("status", () => {
@@ -72,7 +89,7 @@ describe("use Async", () => {
       expect(result.current.error).toBe("rejected");
     });
 
-    it("should erase data when a successed async turn into error", function () {
+    it("should erase data when a successed async turn into error",  () => {
       const { result } = renderHook(() => useAsync());
       act(() => {
         result.current.setData("ok");

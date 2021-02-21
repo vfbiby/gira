@@ -10,6 +10,8 @@ export function useAsync<D>() {
   const mountedRef = useMountedRef();
 
   const setData = (data: D) => {
+    setStateError(null);
+    setStatus("success");
     setStateData(data);
   };
 
