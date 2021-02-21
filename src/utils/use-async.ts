@@ -2,12 +2,21 @@ import { useState } from "react";
 import { useMountedRef } from "./use-mountedRef";
 
 export function useAsync<D>() {
-  const [user, setUser] = useState<D | null>(null);
-  const [status, setStatus] = useState("idle");
+  const [data, setStateData] = useState<D | null>(null);
+  const [status, setStatus] = useState<
+    "idle" | "pending" | "success" | "error"
+  >("idle");
+  const [error, setStateError] = useState<Error | null>(null);
   const mountedRef = useMountedRef();
 
   const setData = (data: D) => {
-    setUser(data);
+    setStateData(data);
+  };
+
+  const setError = (error: Error) => {
+    setStateData(null);
+    setStatus("error");
+    setStateError(error);
   };
 
   const run = async (promise: Promise<D>): Promise<any> => {
@@ -21,15 +30,21 @@ export function useAsync<D>() {
         }
         return response;
       })
-      .catch(() => {});
+      .catch((response) => {
+        setStatus("error");
+        setStateError(response);
+      });
   };
 
   return {
-    data: user,
+    data,
     isIdle: status === "idle",
     isLoading: status === "pending",
     isSuccess: status === "success",
+    isError: status === "error",
+    error,
     run,
     setData,
+    setError,
   };
 }
