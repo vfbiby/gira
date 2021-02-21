@@ -1,3 +1,4 @@
+import { Spin } from "antd";
 import React from "react";
 import { useAuth } from "./utils/hooks";
 
@@ -7,7 +8,11 @@ const AuthenticatedApp = React.lazy(
 const UnauthenticatedApp = React.lazy(() => import("./unauthenticated"));
 
 const FullPageSpinner = () => {
-  return <div className="absolute inset-0 z-10">loading</div>;
+  return (
+    <div className="fixed inset-0 flex opacity-30 bg-black flex-col justify-center w-full h-full text-center">
+      <Spin size="large" />
+    </div>
+  );
 };
 
 function App() {
