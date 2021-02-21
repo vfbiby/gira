@@ -1,5 +1,6 @@
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import React from "react";
+import { useAuth } from "utils/hooks";
 import * as hooks from "utils/use-async";
 import { AuthProvider } from "./auth-context";
 
@@ -43,5 +44,34 @@ describe("auth-context", () => {
     );
 
     expect(container.querySelector("span.ant-spin-dot")).toBeInTheDocument();
+  });
+
+  it("should show children when fetching data is ok", async () => {
+    jest.spyOn(hooks, "useAsync").mockImplementation(() => ({
+      data: { name: "bob" },
+      isIdle: false,
+      isLoading: false,
+      isSuccess: true,
+      isError: false,
+      run: jest.fn(),
+      error: null,
+      setData: jest.fn(),
+      setError: jest.fn(),
+    }));
+
+    const Child = () => {
+      const { user } = useAuth();
+      return <div>welcome {user?.name}</div>;
+    };
+
+    const { container } = render(
+      <AuthProvider>
+        <Child />
+      </AuthProvider>
+    );
+
+    await waitFor(() => {
+      expect(container.textContent).toBe("welcome bob");
+    });
   });
 });
