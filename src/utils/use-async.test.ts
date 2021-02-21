@@ -4,7 +4,7 @@ import { useAsync } from "./use-async";
 describe("use Async", () => {
   it("should get null data when promise is created", () => {
     const { result } = renderHook(() => useAsync());
-    expect(result.current.user).toBe(null);
+    expect(result.current.data).toBe(null);
   });
 
   it("should run promise to get data", async () => {
@@ -13,7 +13,7 @@ describe("use Async", () => {
       result.current.run(Promise.resolve("ok")).then();
     });
     await waitForNextUpdate();
-    expect(result.current.user).toStrictEqual("ok");
+    expect(result.current.data).toStrictEqual("ok");
   });
 
   it("should accept setData from outside", () => {
@@ -21,7 +21,7 @@ describe("use Async", () => {
     act(() => {
       result.current.setData("ok");
     });
-    expect(result.current.user).toStrictEqual("ok");
+    expect(result.current.data).toStrictEqual("ok");
   });
 
   it("should be idle status when async action is just created", () => {
@@ -32,10 +32,10 @@ describe("use Async", () => {
   it("should be loading status when async action is doing", async () => {
     const { result, waitForNextUpdate } = renderHook(() => useAsync());
     act(() => {
-      result.current.run(Promise.resolve("ok"));
+      result.current.run(Promise.resolve());
     });
     await waitForNextUpdate();
     expect(result.current.isIdle).toBe(false);
-    expect(result.current.user).toBe("ok");
+    expect(result.current.isLoading).toBe(true);
   });
 });

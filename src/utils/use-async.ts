@@ -11,7 +11,7 @@ export function useAsync<D>() {
   };
 
   const run = async (promise: Promise<D>): Promise<any> => {
-    setStatus("loading");
+    setStatus("pending");
 
     return promise
       .then((response) => {
@@ -22,5 +22,12 @@ export function useAsync<D>() {
       })
       .catch(() => {});
   };
-  return { user, isIdle: status === "idle", run, setData };
+
+  return {
+    data: user,
+    isIdle: status === "idle",
+    isLoading: status === "pending",
+    run,
+    setData,
+  };
 }
