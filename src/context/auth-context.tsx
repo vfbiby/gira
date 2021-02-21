@@ -26,7 +26,7 @@ export const AuthContext = React.createContext<
 >(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const { user, run, setData: setUser } = useAsync<User | null>();
+  const { data: user, run, setData: setUser } = useAsync<User | null>();
 
   const login = (form: Form) => Auth.login(form).then(setUser);
   const logout = () => Auth.logout().then(() => setUser(null));
