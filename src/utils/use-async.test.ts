@@ -9,15 +9,9 @@ describe("use Async", () => {
 
   it("should run promise to get data", async () => {
     const { result, waitForNextUpdate } = renderHook(() => useAsync());
-    result.current
-      .run(
-        new Promise((res) => {
-          setTimeout(() => {
-            res("ok");
-          }, 500);
-        })
-      )
-      .then();
+    act(() => {
+      result.current.run(Promise.resolve("ok")).then();
+    });
     await waitForNextUpdate();
     expect(result.current.user).toStrictEqual("ok");
   });
@@ -35,13 +29,13 @@ describe("use Async", () => {
     expect(result.current.isIdle).toBe(true);
   });
 
-  it.only("should be loading status when async action is doing", async () => {
+  it("should be loading status when async action is doing", async () => {
     const { result, waitForNextUpdate } = renderHook(() => useAsync());
     act(() => {
-      result.current.run(Promise.resolve('ok'));
+      result.current.run(Promise.resolve("ok"));
     });
     await waitForNextUpdate();
     expect(result.current.isIdle).toBe(false);
-    expect(result.current.user).toBe('ok');
+    expect(result.current.user).toBe("ok");
   });
 });
