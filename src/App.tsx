@@ -9,7 +9,7 @@ const UnauthenticatedApp = React.lazy(() => import("./unauthenticated"));
 
 const FullPageSpinner = () => {
   return (
-    <div className="fixed inset-0 flex opacity-30 bg-black flex-col justify-center w-full h-full text-center">
+    <div className="fixed inset-0 flex flex-col justify-center w-full h-full text-center bg-black opacity-30">
       <Spin size="large" />
     </div>
   );
