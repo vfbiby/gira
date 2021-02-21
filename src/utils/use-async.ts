@@ -17,6 +17,7 @@ export function useAsync<D>() {
       .then((response) => {
         if (mountedRef.current) {
           setData(response);
+          setStatus("success");
         }
         return response;
       })
@@ -27,6 +28,7 @@ export function useAsync<D>() {
     data: user,
     isIdle: status === "idle",
     isLoading: status === "pending",
+    isSuccess: status === "success",
     run,
     setData,
   };

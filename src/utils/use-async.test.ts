@@ -34,8 +34,18 @@ describe("use Async", () => {
     act(() => {
       result.current.run(Promise.resolve());
     });
-    await waitForNextUpdate();
-    expect(result.current.isIdle).toBe(false);
     expect(result.current.isLoading).toBe(true);
+    // avoid below warnning
+    // An update to TestComponent inside a test was not wrapped in act(...).
+    await waitForNextUpdate();
+  });
+
+  it("should be success status after fetching data", async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useAsync());
+    act(() => {
+      result.current.run(Promise.resolve());
+    });
+    await waitForNextUpdate();
+    expect(result.current.isSuccess).toBe(true);
   });
 });
