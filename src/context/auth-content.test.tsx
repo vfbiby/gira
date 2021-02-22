@@ -14,13 +14,14 @@ describe("auth-context", () => {
       .spyOn(React, "useEffect")
       .mockImplementation(() => {});
 
-    const { container } = render(
+    const { queryByText, container } = render(
       <AuthProvider>
         <span>children</span>
       </AuthProvider>
     );
 
     expect(container.querySelector("span.ant-spin-dot")).toBeInTheDocument();
+    expect(queryByText("children")).not.toBeInTheDocument();
     expect(useEffect).toHaveBeenCalledTimes(2);
   });
 
@@ -37,13 +38,14 @@ describe("auth-context", () => {
       setError: jest.fn(),
     }));
 
-    const { container } = render(
+    const { queryByText, container } = render(
       <AuthProvider>
         <span>children</span>
       </AuthProvider>
     );
 
     expect(container.querySelector("span.ant-spin-dot")).toBeInTheDocument();
+    expect(queryByText("children")).not.toBeInTheDocument();
   });
 
   it("should show children when fetching data is ok", async () => {
