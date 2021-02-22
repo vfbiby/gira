@@ -1,45 +1,54 @@
 import { rest } from "msw";
 
 export const projectsHandlers = [
-  rest.get("/projects", (_, res, ctx) => {
+  rest.get("/projects", (req, res, ctx) => {
+    const personId = Number(req.url.searchParams.get("personId"));
+    const name = req.url.searchParams.get("name");
+    const projects = [
+      {
+        id: 1,
+        name: "骑手管理",
+        personId: 1,
+        organization: "外卖组",
+        created: 1604989757139,
+      },
+      {
+        id: 2,
+        name: "团购 APP",
+        personId: 2,
+        organization: "团购组",
+        created: 1604989757139,
+      },
+      {
+        id: 3,
+        name: "物料管理系统",
+        personId: 2,
+        organization: "物料组",
+        created: 1604989757139,
+      },
+      {
+        id: 4,
+        name: "总部管理系统",
+        personId: 3,
+        organization: "物料组",
+        created: 1604989757139,
+      },
+      {
+        id: 5,
+        name: "送餐路线规划系统",
+        personId: 4,
+        organization: "物料组",
+        created: 1604989757139,
+      },
+    ];
     return res(
-      ctx.json([
-        {
-          id: 1,
-          name: "骑手管理",
-          personId: 1,
-          organization: "外卖组",
-          created: 1604989757139,
-        },
-        {
-          id: 2,
-          name: "团购 APP",
-          personId: 2,
-          organization: "团购组",
-          created: 1604989757139,
-        },
-        {
-          id: 3,
-          name: "物料管理系统",
-          personId: 2,
-          organization: "物料组",
-          created: 1604989757139,
-        },
-        {
-          id: 4,
-          name: "总部管理系统",
-          personId: 3,
-          organization: "物料组",
-          created: 1604989757139,
-        },
-        {
-          id: 5,
-          name: "送餐路线规划系统",
-          personId: 4,
-          organization: "物料组",
-          created: 1604989757139,
-        },
-      ])
+      ctx.json(
+        personId
+          ? projects.filter((project) => project.personId === personId)
+          : name
+          ? projects.filter((project) => project.name.includes(name))
+          : projects
+      )
     );
   }),
 

@@ -13,12 +13,16 @@ export interface ProjectProps {
 }
 
 export const ProjectsListScreen = () => {
-  const { data: projects, run } = useAsync<ProjectProps[] | null>();
-  useEffect(() => {
-    run(client("/projects"));
-  }, []);
-
+  const [param, setParam] = useState({
+    name: "",
+    personId: 0,
+  });
   const [persons, setUsers] = useState<Person[] | null>(null);
+  const { data: projects, run } = useAsync<ProjectProps[] | null>();
+
+  useEffect(() => {
+    run(client("/projects", { data: param }));
+  }, [param]);
 
   useEffect(() => {
     client("/users").then(setUsers);
@@ -27,9 +31,15 @@ export const ProjectsListScreen = () => {
   return (
     <div className="dark:text-white">
       <div>
-        <h1 className="py-2 mt-2 text-4xl font-semibold">项目列表</h1>
+        <h1 className="py-2 mt-2 text-4xl font-semibold dark:text-white">
+          项目列表
+        </h1>
         <div className="pb-2">
-          <SearchPanel users={persons} />
+          <SearchPanel
+            param={param}
+            setParam={setParam}
+            users={persons || []}
+          />
         </div>
       </div>
       <ProjectsList users={persons} projects={projects} />
