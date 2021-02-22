@@ -11,6 +11,7 @@ interface IRenderResultProps {
   value: IPersonProps[];
   add: (item: IPersonProps) => void;
   removeIndex: (index: number) => void;
+  setArray: (value: React.SetStateAction<IPersonProps[]>) => void;
   clear: () => void;
 }
 
@@ -51,5 +52,13 @@ describe("useArray", () => {
       result.current.clear();
     });
     expect(result.current.value).toStrictEqual([]);
+  });
+
+  it("should return setArray for setting a new array", () => {
+    const newPerson = [...persons, { name: "vf", age: 33 }];
+    act(() => {
+      result.current.setArray(newPerson);
+    });
+    expect(result.current.value).toStrictEqual(newPerson);
   });
 });

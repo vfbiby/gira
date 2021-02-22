@@ -11,5 +11,5 @@ export const useArray = <T>(inputArray: T[]) => {
   const clear = () => {
     setArray([]);
   };
-  return { value: array, add, removeIndex, clear };
+  return { value: array, setArray, add, removeIndex, clear };
 };
