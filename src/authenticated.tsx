@@ -7,6 +7,7 @@ import {
   LinkProps,
   useMatch,
 } from "react-router-dom";
+import { HomeScreen } from "screens/Home";
 import { ProjectsListScreen } from "screens/project-list";
 import { useDarkTheme } from "./context/dark-context";
 
@@ -14,25 +15,10 @@ const AuthenticatedApp = () => {
   return (
     <>
       <PageHeader />
-      <main className="h-screen">
+      <main className="h-screen p-2">
         <AppRouters />
       </main>
     </>
-  );
-};
-
-const AppRouters = () => {
-  return (
-    <Routes>
-      <Route path="/projects" element={<ProjectsListScreen />} />
-    </Routes>
-  );
-};
-
-const NavLink = (props: LinkProps) => {
-  const match = useMatch(`${props.to}`);
-  return (
-    <RouterLink className={`${match ? "text-red-800" : ""}`} {...props} />
   );
 };
 
@@ -50,6 +36,20 @@ const Nav = () => {
       </ul>
     </nav>
   );
+};
+
+const AppRouters = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<HomeScreen />} />
+      <Route path="/projects" element={<ProjectsListScreen />} />
+    </Routes>
+  );
+};
+
+const NavLink = (props: LinkProps) => {
+  const match = useMatch(`${props.to}`);
+  return <RouterLink className={`${match ? "text-red-800" : ""}`} {...props} />;
 };
 
 const PageHeader = () => {

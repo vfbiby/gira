@@ -1,5 +1,3 @@
-import React from "react";
-
 export const ProjectsListScreen = () => {
-  return <div>ProjectsListScreen</div>;
+  return <div className="dark:text-white">ProjectsListScreen</div>;
 };
