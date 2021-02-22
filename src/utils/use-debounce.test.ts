@@ -1,17 +1,28 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { cleanup, renderHook } from "@testing-library/react-hooks";
 import { useDebounce } from "./use-debounce";
 
 describe("useDebounce", () => {
+  beforeEach(cleanup);
   it("should return first value when giving just one value", async () => {
-    const { result, waitForNextUpdate } = renderHook(
+    const { result } = renderHook(
       ({ value, delay }) => useDebounce(value, delay),
       {
         initialProps: { value: "first", delay: 500 },
       }
     );
-    await waitForNextUpdate();
     expect(result.current.debounceValue).toBe("first");
   });
 
-  it("should return second value when assign twice", async () => {});
+  it("should return last value when assign value many times", async () => {
+    const { result, rerender, waitForNextUpdate } = renderHook(
+      ({ value, delay }) => useDebounce(value, delay),
+      {
+        initialProps: { value: "first", delay: 500 },
+      }
+    );
+    rerender({ value: "second", delay: 500 });
+    rerender({ value: "three", delay: 500 });
+    await waitForNextUpdate();
+    expect(result.current.debounceValue).toBe("three");
+  });
 });
