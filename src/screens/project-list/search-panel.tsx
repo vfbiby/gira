@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { client } from "utils/api-client";
-
 export interface Person {
   id: number;
   name: string;

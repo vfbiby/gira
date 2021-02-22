@@ -1,9 +1,13 @@
+import dayjs from "dayjs";
 import { ProjectProps } from ".";
+import { Person } from "./search-panel";
 
 export const ProjectsList = ({
   projects,
+  users,
 }: {
   projects: ProjectProps[] | null;
+  users: Person[] | null;
 }) => {
   return (
     <table className="w-full table-fixed">
@@ -24,8 +28,12 @@ export const ProjectsList = ({
               <td></td>
               <td className="py-2">{project.name}</td>
               <td>{project.organization}</td>
-              <td>{project.personId}</td>
-              <td>{project.created}</td>
+              <td>{users?.find(({ id }) => id === project.personId)?.name}</td>
+              <td>
+                {project.created
+                  ? dayjs(project.created).format("YYYY-MM-DD")
+                  : "null"}
+              </td>
               <td></td>
             </tr>
           );

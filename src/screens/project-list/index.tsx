@@ -32,7 +32,7 @@ export const ProjectsListScreen = () => {
           <SearchPanel users={persons} />
         </div>
       </div>
-      <ProjectsList projects={projects} />
+      <ProjectsList users={persons} projects={projects} />
     </div>
   );
 };
