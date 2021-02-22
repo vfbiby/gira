@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { client } from "utils/api-client";
 import { useAsync } from "utils/use-async";
+import { useDebounce } from "utils/use-debounce";
 import { ProjectsList } from "./list";
 import { Person, SearchPanel } from "./search-panel";
 
@@ -17,12 +18,13 @@ export const ProjectsListScreen = () => {
     name: "",
     personId: 0,
   });
+  const { debouncedValue } = useDebounce(param, 500);
   const [persons, setUsers] = useState<Person[] | null>(null);
   const { data: projects, run } = useAsync<ProjectProps[] | null>();
 
   useEffect(() => {
     run(client("/projects", { data: param }));
-  }, [param]);
+  }, [debouncedValue]);
 
   useEffect(() => {
     client("/users").then(setUsers);
