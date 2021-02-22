@@ -1,4 +1,5 @@
 import React from "react";
+import {ProjectsList} from "./list";
 import { SearchPanel } from "./search-panel";
 
 export const ProjectsListScreen = () => {
@@ -10,18 +11,7 @@ export const ProjectsListScreen = () => {
           <SearchPanel />
         </div>
       </div>
-      <table className="w-full table-fixed">
-        <thead>
-          <tr>
-            <td className="w-1/10"></td>
-            <td className="w-1/5">名称</td>
-            <td className="w-1/5">部门</td>
-            <td className="w-1/5">负责人</td>
-            <td className="w-1/5">创建时间</td>
-            <td className="w-1/10"></td>
-          </tr>
-        </thead>
-      </table>
+      <ProjectsList />
     </div>
   );
 };
