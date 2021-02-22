@@ -2,9 +2,21 @@ import { renderHook, RenderResult } from "@testing-library/react-hooks";
 import { act } from "react-dom/test-utils";
 import { useArray } from "./use-array";
 
+interface IPersonProps {
+  name: string;
+  age: number;
+}
+
+interface IRenderResultProps {
+  value: IPersonProps[];
+  add: (item: IPersonProps) => void;
+  removeIndex: (index: number) => void;
+  clear: () => void;
+}
+
 describe("useArray", () => {
-  let persons: { name: string; age: number }[];
-  let result: any;
+  let persons: IPersonProps[];
+  let result: RenderResult<IRenderResultProps>;
 
   beforeEach(() => {
     persons = [
