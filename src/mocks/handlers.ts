@@ -1,5 +1,6 @@
 // src/mocks/handlers.js
 import { rest } from "msw";
+import { projectsHandlers } from "./projects";
 
 interface LoginBody {
   username: string;
@@ -7,6 +8,7 @@ interface LoginBody {
 }
 
 export const handlers = [
+  ...projectsHandlers,
   rest.post<LoginBody>("/login", (req, res, ctx) => {
     const { username, password } = req.body;
     if (username === "vf" && password === "bb") {
