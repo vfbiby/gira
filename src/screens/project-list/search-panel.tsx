@@ -1,6 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { client } from "utils/api-client";
-import { useAsync } from "utils/use-async";
 
 interface Person {
   id: number;
@@ -8,10 +7,10 @@ interface Person {
 }
 
 export const SearchPanel = () => {
-  const { data: persons, run } = useAsync<Person[] | null>();
+  const [persons, setUsers] = useState<Person[] | null>(null);
 
   useEffect(() => {
-    run(client("/users"));
+    client("/users").then(setUsers);
   }, []);
 
   return (

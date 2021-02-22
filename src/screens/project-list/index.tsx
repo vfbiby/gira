@@ -1,8 +1,22 @@
-import React from "react";
-import {ProjectsList} from "./list";
+import React, { useEffect } from "react";
+import { client } from "utils/api-client";
+import { useAsync } from "utils/use-async";
+import { ProjectsList } from "./list";
 import { SearchPanel } from "./search-panel";
 
+export interface ProjectProps {
+  id: number;
+  name: string;
+  personId: number;
+  organization: string;
+  created: number;
+}
+
 export const ProjectsListScreen = () => {
+  const { data: projects, run } = useAsync<ProjectProps[] | null>();
+  useEffect(() => {
+    run(client("/projects"));
+  }, []);
   return (
     <div className="dark:text-white">
       <div>
@@ -11,7 +25,7 @@ export const ProjectsListScreen = () => {
           <SearchPanel />
         </div>
       </div>
-      <ProjectsList />
+      <ProjectsList projects={projects} />
     </div>
   );
 };

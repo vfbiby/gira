@@ -1,20 +1,10 @@
-import { useEffect } from "react";
-import { client } from "utils/api-client";
-import { useAsync } from "utils/use-async";
+import { ProjectProps } from ".";
 
-interface ProjectProps {
-  id: number;
-  name: string;
-  personId: number;
-  organization: string;
-  created: number;
-}
-
-export const ProjectsList = () => {
-  const { data: projects, run } = useAsync<ProjectProps[] | null>();
-  useEffect(() => {
-    run(client("/projects"));
-  }, []);
+export const ProjectsList = ({
+  projects,
+}: {
+  projects: ProjectProps[] | null;
+}) => {
   return (
     <table className="w-full table-fixed">
       <thead>
@@ -30,7 +20,7 @@ export const ProjectsList = () => {
       <tbody>
         {projects?.map((project) => {
           return (
-            <tr className="border-b-2">
+            <tr key={project.id} className="border-b-2">
               <td></td>
               <td className="py-2">{project.name}</td>
               <td>{project.organization}</td>
