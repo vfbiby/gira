@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
 import { client } from "utils/api-client";
 
-interface Person {
+export interface Person {
   id: number;
   name: string;
 }
 
-export const SearchPanel = () => {
-  const [persons, setUsers] = useState<Person[] | null>(null);
-
-  useEffect(() => {
-    client("/users").then(setUsers);
-  }, []);
-
+export const SearchPanel = ({ users }: { users: Person[] | null }) => {
   return (
     <form className="flex">
       <div>
@@ -29,7 +23,7 @@ export const SearchPanel = () => {
           name="personId"
         >
           <option>负责人</option>
-          {persons?.map((person) => {
+          {users?.map((person) => {
             return (
               <option key={person.id} value={person.id}>
                 {person.name}
