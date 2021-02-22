@@ -1,12 +1,54 @@
 import AccountDropdown from "components/AccountDropdown";
+import React from "react";
+import {
+  Route,
+  Routes,
+  Link as RouterLink,
+  LinkProps,
+  useMatch,
+} from "react-router-dom";
+import { ProjectsListScreen } from "screens/project-list";
 import { useDarkTheme } from "./context/dark-context";
 
 const AuthenticatedApp = () => {
   return (
     <>
       <PageHeader />
-      <main className="h-screen"></main>
+      <main className="h-screen">
+        <AppRouters />
+      </main>
     </>
+  );
+};
+
+const AppRouters = () => {
+  return (
+    <Routes>
+      <Route path="/projects" element={<ProjectsListScreen />} />
+    </Routes>
+  );
+};
+
+const NavLink = (props: LinkProps) => {
+  const match = useMatch(`${props.to}`);
+  return (
+    <RouterLink className={`${match ? "text-red-800" : ""}`} {...props} />
+  );
+};
+
+const Nav = () => {
+  return (
+    <nav>
+      <ul className="flex items-center">
+        <li className="px-2">
+          <NavLink to="/">Home</NavLink>
+        </li>
+        <li className="px-2">
+          <NavLink to="/projects">Projects</NavLink>
+        </li>
+        <li></li>
+      </ul>
+    </nav>
   );
 };
 
@@ -17,7 +59,7 @@ const PageHeader = () => {
     <header className="shadow-lg dark:bg-gray-800">
       <div className="flex items-center justify-between p-2 px-3">
         <div className="dark:text-white">
-          <a href="#"></a>
+          <Nav />
         </div>
         <div className="flex items-center">
           <button
