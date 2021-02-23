@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { client } from "utils/api-client";
-import { useAsync } from "utils/use-async";
+import React, { useState } from "react";
 import { useDebounce } from "utils/use-debounce";
 import { useProjects } from "utils/use-projects";
+import { useUsers } from "utils/use-users";
 import { ProjectsList } from "./list";
-import { User, SearchPanel } from "./search-panel";
+import { SearchPanel } from "./search-panel";
 
 export interface ProjectProps {
   id: number;
@@ -20,12 +19,8 @@ export const ProjectsListScreen = () => {
     personId: 0,
   });
   const { debouncedValue } = useDebounce(param, 500);
-  const [persons, setUsers] = useState<User[] | null>(null);
+  const { users } = useUsers(param);
   const { data: projects, isLoading } = useProjects(debouncedValue);
-
-  useEffect(() => {
-    client("/users").then(setUsers);
-  }, []);
 
   return (
     <div className="rounded dark:text-white">
@@ -37,14 +32,14 @@ export const ProjectsListScreen = () => {
           <SearchPanel
             param={param}
             setParam={setParam}
-            users={persons || []}
+            users={users || []}
           />
         </div>
       </div>
       <div className="p-10 mt-2 bg-blue-100 rounded-t-xl dark:bg-gray-800 ">
         <ProjectsList
           isLoading={isLoading}
-          users={persons}
+          users={users}
           projects={projects}
         />
       </div>
