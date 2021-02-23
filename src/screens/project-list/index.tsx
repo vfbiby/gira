@@ -31,7 +31,7 @@ export const ProjectsListScreen = () => {
   }, []);
 
   return (
-    <div className="dark:text-white">
+    <div className="rounded dark:text-white">
       <div>
         <h1 className="py-2 mt-2 text-4xl font-semibold dark:text-white">
           项目列表
@@ -44,7 +44,9 @@ export const ProjectsListScreen = () => {
           />
         </div>
       </div>
-      <ProjectsList users={persons} projects={projects} />
+      <div className="p-10 mt-2 bg-blue-100 rounded-t-xl dark:bg-gray-800 ">
+        <ProjectsList users={persons} projects={projects} />
+      </div>
     </div>
   );
 };

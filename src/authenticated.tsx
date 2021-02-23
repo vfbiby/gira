@@ -49,7 +49,7 @@ const AppRouters = () => {
 
 const NavLink = (props: LinkProps) => {
   const match = useMatch(`${props.to}`);
-  return <RouterLink className={`${match ? "text-red-800" : ""}`} {...props} />;
+  return <RouterLink className={`${match ? "text-blue-600" : ""}`} {...props} />;
 };
 
 const PageHeader = () => {
