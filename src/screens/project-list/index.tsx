@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { client } from "utils/api-client";
 import { useAsync } from "utils/use-async";
 import { useDebounce } from "utils/use-debounce";
+import { useProjects } from "utils/use-projects";
 import { ProjectsList } from "./list";
 import { User, SearchPanel } from "./search-panel";
 
@@ -20,11 +21,7 @@ export const ProjectsListScreen = () => {
   });
   const { debouncedValue } = useDebounce(param, 500);
   const [persons, setUsers] = useState<User[] | null>(null);
-  const { data: projects, run, isLoading } = useAsync<ProjectProps[] | null>();
-
-  useEffect(() => {
-    run(client("/projects", { data: param }));
-  }, [debouncedValue]);
+  const { data: projects, isLoading } = useProjects(debouncedValue);
 
   useEffect(() => {
     client("/users").then(setUsers);
