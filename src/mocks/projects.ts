@@ -42,6 +42,7 @@ export const projectsHandlers = [
       },
     ];
     return res(
+      ctx.delay(),
       ctx.json(
         personId
           ? projects.filter((project) => project.personId === personId)
