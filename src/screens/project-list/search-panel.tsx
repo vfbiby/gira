@@ -1,10 +1,10 @@
-export interface Person {
+export interface User {
   id: number;
   name: string;
 }
 
 interface SearchProps {
-  users: Person[];
+  users: User[];
   param: {
     name: string;
     personId: number;

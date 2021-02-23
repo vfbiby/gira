@@ -1,13 +1,13 @@
 import dayjs from "dayjs";
 import { ProjectProps } from ".";
-import { Person } from "./search-panel";
+import { User } from "./search-panel";
 
 export const ProjectsList = ({
   projects,
   users,
 }: {
   projects: ProjectProps[] | null;
-  users: Person[] | null;
+  users: User[] | null;
 }) => {
   return (
     <table className="w-full table-fixed">

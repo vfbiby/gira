@@ -3,7 +3,7 @@ import { client } from "utils/api-client";
 import { useAsync } from "utils/use-async";
 import { useDebounce } from "utils/use-debounce";
 import { ProjectsList } from "./list";
-import { Person, SearchPanel } from "./search-panel";
+import { User, SearchPanel } from "./search-panel";
 
 export interface ProjectProps {
   id: number;
@@ -19,7 +19,7 @@ export const ProjectsListScreen = () => {
     personId: 0,
   });
   const { debouncedValue } = useDebounce(param, 500);
-  const [persons, setUsers] = useState<Person[] | null>(null);
+  const [persons, setUsers] = useState<User[] | null>(null);
   const { data: projects, run } = useAsync<ProjectProps[] | null>();
 
   useEffect(() => {

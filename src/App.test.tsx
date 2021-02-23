@@ -5,6 +5,7 @@ import { AuthProvider } from "./context/auth-context";
 import { localStorageKey } from "./auth-provider";
 import { mockSystemPrefersColorThemeTo } from "./mocks/mock-lib";
 import { DarkProvider } from "./context/dark-context";
+import {BrowserRouter} from "react-router-dom";
 
 describe("Unauthenticated", () => {
   beforeEach(() => {
@@ -32,11 +33,13 @@ describe("Authenticated", () => {
   it("should render authorized page when token is valid", async () => {
     window.localStorage.setItem(localStorageKey, "token-user-bb");
     render(
-      <DarkProvider>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </DarkProvider>
+      <BrowserRouter>
+        <DarkProvider>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </DarkProvider>
+      </BrowserRouter>
     );
     await waitFor(() => {
       expect(screen.getByText("bb")).toBeInTheDocument();
