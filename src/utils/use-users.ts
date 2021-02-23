@@ -4,11 +4,11 @@ import { client } from "./api-client";
 import { cleanObject } from "./clean-object";
 import { useAsync } from "./use-async";
 
-export const useUsers = (param: Partial<User>) => {
-  const { data: users, run } = useAsync<User[] | null>();
+export const useUsers = (param?: Partial<User>) => {
+  const { run, ...rest } = useAsync<User[] | null>();
 
   useEffect(() => {
-    run(client("/users", { data: cleanObject(param) }));
-  }, ["param"]);
-  return { users };
+    run(client("/users", { data: cleanObject(param || {}) }));
+  }, [param]);
+  return rest;
 };

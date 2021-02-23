@@ -19,7 +19,7 @@ export const ProjectsListScreen = () => {
     personId: 0,
   });
   const { debouncedValue } = useDebounce(param, 500);
-  const { users } = useUsers(param);
+  const { data: users } = useUsers();
   const { data: projects, isLoading } = useProjects(debouncedValue);
 
   return (
@@ -29,19 +29,11 @@ export const ProjectsListScreen = () => {
           项目列表
         </h1>
         <div className="pb-2">
-          <SearchPanel
-            param={param}
-            setParam={setParam}
-            users={users || []}
-          />
+          <SearchPanel param={param} setParam={setParam} users={users || []} />
         </div>
       </div>
       <div className="p-10 mt-2 bg-blue-100 rounded-t-xl dark:bg-gray-800 ">
-        <ProjectsList
-          isLoading={isLoading}
-          users={users}
-          projects={projects}
-        />
+        <ProjectsList isLoading={isLoading} users={users} projects={projects} />
       </div>
     </div>
   );
