@@ -20,14 +20,10 @@ export const ProjectsListScreen = () => {
   });
   const { debouncedValue } = useDebounce(param, 500);
   const [persons, setUsers] = useState<User[] | null>(null);
-  const { data: projects, run } = useAsync<ProjectProps[] | null>();
-  const [isLoading, setIsLoading] = useState(false);
+  const { data: projects, run, isLoading } = useAsync<ProjectProps[] | null>();
 
   useEffect(() => {
-    setIsLoading(true);
-    run(client("/projects", { data: param })).finally(() => {
-      setIsLoading(false);
-    });
+    run(client("/projects", { data: param }));
   }, [debouncedValue]);
 
   useEffect(() => {
