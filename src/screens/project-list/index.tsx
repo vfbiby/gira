@@ -21,9 +21,13 @@ export const ProjectsListScreen = () => {
   const { debouncedValue } = useDebounce(param, 500);
   const [persons, setUsers] = useState<User[] | null>(null);
   const { data: projects, run } = useAsync<ProjectProps[] | null>();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    run(client("/projects", { data: param }));
+    setIsLoading(true);
+    run(client("/projects", { data: param })).finally(() => {
+      setIsLoading(false);
+    });
   }, [debouncedValue]);
 
   useEffect(() => {
@@ -45,7 +49,11 @@ export const ProjectsListScreen = () => {
         </div>
       </div>
       <div className="p-10 mt-2 bg-blue-100 rounded-t-xl dark:bg-gray-800 ">
-        <ProjectsList users={persons} projects={projects} />
+        <ProjectsList
+          isLoading={isLoading}
+          users={persons}
+          projects={projects}
+        />
       </div>
     </div>
   );
