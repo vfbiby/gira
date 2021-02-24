@@ -30,6 +30,7 @@ export const handlers = [
     }
     //sessionStorage.setItem("is-authenticated", "true");
     return res(
+      ctx.status(401),
       ctx.json({
         status: 401,
         errors: [],
@@ -61,7 +62,6 @@ export const handlers = [
     }
 
     return res(
-      ctx.status(200),
       ctx.json({
         id: 1,
         name: "bb",

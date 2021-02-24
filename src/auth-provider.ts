@@ -20,9 +20,11 @@ export const login = async (data: Form) => {
       "Content-Type": "Application/json",
     },
     body: JSON.stringify(data),
-  }).then(async (response: Response) => {
-    let data = await response.json();
-    return handleUserResponsed(data["data"]);
+  }).then(async (response) => {
+    if (!response.ok) {
+      return Promise.reject((await response.json())["message"]);
+    }
+    return handleUserResponsed((await response.json())["data"]);
   });
 };
 
