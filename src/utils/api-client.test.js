@@ -15,8 +15,8 @@ describe("Api-client", () => {
   });
 
   it("should support post method", async () => {
-    const result = await client("/login", { method: "POST" }).then();
-    expect(result.message).toBe("username or password is wrong!");
+    const result = client("/login", { method: "POST" });
+    await expect(result).rejects.toEqual("Please re-authenticate.");
   });
 
   it("should accept data to post to server to login", async () => {

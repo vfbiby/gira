@@ -21,7 +21,10 @@ export function useAsync<D>() {
     setStateError(error);
   };
 
-  const run = async (promise: Promise<D>): Promise<any> => {
+  const run = async (
+    promise: Promise<D>,
+    config?: { throwOnError: boolean }
+  ): Promise<any> => {
     setStatus("pending");
 
     return promise
@@ -35,6 +38,7 @@ export function useAsync<D>() {
       .catch((response) => {
         setStatus("error");
         setStateError(response);
+        if (config?.throwOnError) return Promise.reject(response);
       });
   };
 
