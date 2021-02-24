@@ -5,7 +5,7 @@ import { AuthProvider } from "./context/auth-context";
 import { localStorageKey } from "./auth-provider";
 import { mockSystemPrefersColorThemeTo } from "./mocks/mock-lib";
 import { DarkProvider } from "./context/dark-context";
-import {BrowserRouter} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 describe("Unauthenticated", () => {
   beforeEach(() => {
@@ -13,11 +13,13 @@ describe("Unauthenticated", () => {
   });
   it("should show login page if there is no token in localStorage", async () => {
     render(
-      <DarkProvider>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </DarkProvider>
+      <BrowserRouter>
+        <DarkProvider>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </DarkProvider>
+      </BrowserRouter>
     );
     await waitFor(() => {
       expect(screen.getByText("Username")).toBeInTheDocument();
