@@ -29,8 +29,13 @@ export const LoginForm = () => {
           className="w-full px-4 py-2 rounded bg-gray-50"
           type="text"
           name="username"
-          ref={register}
+          ref={register({ required: true })}
         />
+      </div>
+      <div>
+        {errors.username && (
+          <p className="pt-3 text-pink-700">The field is required.</p>
+        )}
       </div>
       <div className="flex flex-col mt-2">
         <label
