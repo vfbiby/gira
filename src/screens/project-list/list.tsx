@@ -1,5 +1,7 @@
 import { PageLoading } from "components/page-loading";
 import dayjs from "dayjs";
+import React from "react";
+import { Link } from "react-router-dom";
 import { ProjectProps } from ".";
 import { User } from "./search-panel";
 
@@ -29,7 +31,7 @@ export const ProjectsList = ({
             return (
               <tr key={project.id} className="">
                 <td className="px-4 py-2 border border-blue-500">
-                  {project.name}
+                  <Link to={`${project.id}`}>{project.name}</Link>
                 </td>
                 <td className="px-4 py-2 border border-blue-500">
                   {project.organization}

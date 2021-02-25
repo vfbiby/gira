@@ -8,6 +8,7 @@ import {
   useMatch,
 } from "react-router-dom";
 import { HomeScreen } from "screens/Home";
+import { ProjectScreen } from "screens/project";
 import { ProjectsListScreen } from "screens/project-list";
 import { useDarkTheme } from "./context/dark-context";
 
@@ -43,13 +44,16 @@ const AppRouters = () => {
     <Routes>
       <Route path="/" element={<HomeScreen />} />
       <Route path="/projects" element={<ProjectsListScreen />} />
+      <Route path="/projects/:projectId" element={<ProjectScreen />} />
     </Routes>
   );
 };
 
 const NavLink = (props: LinkProps) => {
   const match = useMatch(`${props.to}`);
-  return <RouterLink className={`${match ? "text-blue-600" : ""}`} {...props} />;
+  return (
+    <RouterLink className={`${match ? "text-blue-600" : ""}`} {...props} />
+  );
 };
 
 const PageHeader = () => {
