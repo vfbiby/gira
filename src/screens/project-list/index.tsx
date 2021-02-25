@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDebounce } from "utils/use-debounce";
+import { useDocumentTitle } from "utils/use-documentTitle";
 import { useProjects } from "utils/use-projects";
 import { useUsers } from "utils/use-users";
 import { ProjectsList } from "./list";
@@ -21,6 +22,8 @@ export const ProjectsListScreen = () => {
   const { debouncedValue } = useDebounce(param, 500);
   const { data: users } = useUsers();
   const { data: projects, isLoading } = useProjects(debouncedValue);
+
+  useDocumentTitle("项目列表");
 
   return (
     <div className="rounded dark:text-white">
