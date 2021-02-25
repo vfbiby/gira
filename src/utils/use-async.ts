@@ -35,10 +35,11 @@ export function useAsync<D>() {
         }
         return response;
       })
-      .catch((response) => {
+      .catch((error) => {
         setStatus("error");
-        setStateError(response);
-        if (config?.throwOnError) return Promise.reject(response);
+        setStateError(error);
+        if (config?.throwOnError) return Promise.reject(error);
+        return error;
       });
   };
 

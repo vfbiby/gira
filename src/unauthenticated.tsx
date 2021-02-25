@@ -1,3 +1,5 @@
+import { ErrorNotice } from "components/error-notice";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "utils/hooks";
 import { useAsync } from "utils/use-async";
@@ -8,12 +10,16 @@ interface LoginFormProps {
   password: string;
 }
 
-export const LoginForm = () => {
+export const LoginForm = ({ onError }: { onError: (error: Error) => void }) => {
   const { login } = useAuth();
   const { run } = useAsync();
   const { register, handleSubmit, errors } = useForm<LoginFormProps>();
-  const onSubmit = (data: LoginFormProps) => {
-    run(login(data));
+  const onSubmit = async (data: LoginFormProps) => {
+    try {
+      await run(login(data), { throwOnError: true });
+    } catch (e) {
+      onError(e);
+    }
   };
 
   return (
@@ -26,7 +32,7 @@ export const LoginForm = () => {
           Username
         </label>
         <input
-          className="w-full px-4 py-2 rounded bg-gray-50"
+          className="w-full px-4 py-2 text-pink-500 rounded bg-gray-50"
           type="text"
           name="username"
           ref={register({ required: true })}
@@ -45,7 +51,7 @@ export const LoginForm = () => {
           Password
         </label>
         <input
-          className="w-full px-4 py-2 rounded bg-gray-50"
+          className="w-full px-4 py-2 text-pink-500 rounded bg-gray-50"
           type="password"
           name="password"
           ref={register({ required: true })}
@@ -67,9 +73,12 @@ export const LoginForm = () => {
 
 const UnauthenticatedApp = () => {
   const darkTheme = useDarkTheme();
+  const [error, setError] = useState<Error | null>(null);
+
   return (
     <div className="flex flex-col items-center w-full h-screen min-h-full mx-auto">
-      <LoginForm />
+      {error && <ErrorNotice error={error} />}
+      <LoginForm onError={setError} />
       <div className="w-full">
         <button
           type="button"
