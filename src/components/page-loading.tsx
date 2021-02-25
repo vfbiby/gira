@@ -3,7 +3,7 @@ export const PageLoading = ({ isLoading }: { isLoading: boolean }) => {
     <div
       className={`${
         isLoading ? "block" : "hidden"
-      } absolute inset-0 w-full-spin flex justify-center items-center h-full bg-black opacity-30`}
+      } absolute inset-0 w-full-spin flex justify-center items-center h-full`}
     >
       <svg
         className={`${
