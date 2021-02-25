@@ -1,5 +1,4 @@
 import {
-  FullPage,
   FullPageErrorFallback,
   FullPageSpinner,
 } from "components/full-page";
