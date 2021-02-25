@@ -26,5 +26,9 @@ export const FullPageSpinner = () => {
 };
 
 export const FullPageErrorFallback = ({ error }: { error: Error | null }) => {
-  return <FullPage>{error?.message}</FullPage>;
+  return (
+    <FullPage>
+      <div className="text-6xl text-red-700">{error?.message}</div>
+    </FullPage>
+  );
 };
