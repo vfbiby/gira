@@ -1,4 +1,8 @@
-import { FullPageSpinner } from "App";
+import {
+  FullPage,
+  FullPageErrorFallback,
+  FullPageSpinner,
+} from "components/full-page";
 import React, { ReactNode } from "react";
 import * as Auth from "../auth-provider";
 import { client } from "../utils/api-client";
@@ -27,7 +31,15 @@ export const AuthContext = React.createContext<
 >(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const { data: user, isIdle, isLoading, run, setData: setUser } = useAsync<User | null>();
+  const {
+    data: user,
+    isIdle,
+    isLoading,
+    isError,
+    error,
+    run,
+    setData: setUser,
+  } = useAsync<User | null>();
 
   const login = (form: Form) => Auth.login(form).then(setUser);
   const logout = () => Auth.logout().then(() => setUser(null));
@@ -39,6 +51,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   if (isIdle || isLoading) {
     return <FullPageSpinner />;
+  }
+
+  if (isError) {
+    return <FullPageErrorFallback error={error} />;
   }
 
   return (

@@ -108,7 +108,7 @@ describe("use Async", () => {
       expect(result.current.error).toStrictEqual(Error("some errors founded"));
     });
 
-    it("should should an error and setError when specify throwOnError", async () => {
+    it("should throw an error and setError when specify throwOnError", async () => {
       const { result, waitForNextUpdate } = renderHook(() => useAsync());
 
       act(() => {

@@ -2,6 +2,7 @@ import { render, waitFor } from "@testing-library/react";
 import React from "react";
 import { useAuth } from "utils/hooks";
 import * as hooks from "utils/use-async";
+import * as http from "utils/api-client";
 import { AuthProvider } from "./auth-context";
 
 describe("auth-context", () => {
@@ -74,6 +75,35 @@ describe("auth-context", () => {
 
     await waitFor(() => {
       expect(container.textContent).toBe("welcome bob");
+    });
+  });
+
+  it("should show error page while there is an error", async () => {
+    jest.spyOn(hooks, "useAsync").mockImplementation(() => ({
+      data: null,
+      isIdle: false,
+      isLoading: false,
+      isSuccess: false,
+      isError: true,
+      run: jest.fn(),
+      error: new Error("get user info error"),
+      setData: jest.fn(),
+      setError: jest.fn(),
+    }));
+
+    jest.spyOn(http, "client").mockImplementation(() => {
+      return Promise.resolve({});
+    });
+
+    const { queryByText, container } = render(
+      <AuthProvider>
+        <span>children</span>
+      </AuthProvider>
+    );
+
+    await waitFor(() => {
+      expect(queryByText("children")).not.toBeInTheDocument();
+      expect(container.textContent).toEqual("get user info error");
     });
   });
 });

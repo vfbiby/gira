@@ -54,7 +54,7 @@ export const handlers = [
 
     if (!authorization) {
       return res(
-        ctx.status(401),
+        //ctx.status(401),
         ctx.json({
           errorMessage: "Not authorized",
         })
@@ -67,6 +67,15 @@ export const handlers = [
         name: "bb",
         email: "3432@qq.com",
         token: "valid-token",
+      })
+    );
+  }),
+
+  rest.get("/401", (_, res, ctx) => {
+    return res(
+      ctx.status(401),
+      ctx.json({
+        errorMessage: "Not authorized",
       })
     );
   }),

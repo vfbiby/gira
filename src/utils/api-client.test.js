@@ -3,8 +3,8 @@ import { client } from "./api-client";
 
 describe("Api-client", () => {
   it("should support get method", async () => {
-    const result = client("/me").then();
-    await expect(result).rejects.toEqual("Please re-authenticate.");
+    const result = client("/getForTest").then();
+    expect(await result).toStrictEqual({ user_id: null });
   });
 
   it("should support get method with data", async () => {
@@ -44,9 +44,17 @@ describe("Api-client", () => {
     window.localStorage.setItem(localStorageKey, "valid-token");
     expect(getToken()).toBe("valid-token");
     //Act
-    const result = client("/me", { token: undefined }).then();
+    const result = client("/401", { token: undefined }).then();
     //Assert
     await expect(result).rejects.toEqual("Please re-authenticate.");
     expect(getToken()).toBe(undefined);
+  });
+
+  it("should get error when token is not exists in localStorage", async () => {
+    //me api must provide a { token }, if not ,it will response with 200 and errorMessage
+    const result = client("/me", { token: undefined }).then();
+    expect(await result).toStrictEqual({
+      errorMessage: "Not authorized",
+    });
   });
 });
