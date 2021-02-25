@@ -14,6 +14,10 @@ describe("Auth Provider", () => {
 
   it("should throw promise reject error when server validate failure", async () => {
     const user = login({ username: "wrong", password: "void" });
-    await expect(user).rejects.toEqual("username or password is wrong!");
+    await expect(user).rejects.toEqual({
+      errors: [],
+      message: "username or password is wrong!",
+      status: 401,
+    });
   });
 });

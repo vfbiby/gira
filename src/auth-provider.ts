@@ -22,7 +22,7 @@ export const login = async (data: Form) => {
     body: JSON.stringify(data),
   }).then(async (response) => {
     if (!response.ok) {
-      return Promise.reject((await response.json())["message"]);
+      return Promise.reject((await response.json()));
     }
     return handleUserResponsed((await response.json())["data"]);
   });
