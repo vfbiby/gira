@@ -44,7 +44,7 @@ const AppRouters = () => {
     <Routes>
       <Route path="/" element={<HomeScreen />} />
       <Route path="/projects" element={<ProjectsListScreen />} />
-      <Route path="/projects/:projectId" element={<ProjectScreen />} />
+      <Route path="/projects/:projectId/*" element={<ProjectScreen />} />
     </Routes>
   );
 };

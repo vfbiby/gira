@@ -1,14 +1,13 @@
 import React from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes } from "react-router-dom";
 import { EpicScreen } from "screens/epic";
 import { KanbanScreen } from "screens/kanban";
 
 export const ProjectScreen = () => {
   return (
     <>
-      <h1 className="dark:text-white">ProjectScreen</h1>
       <div className="flex dark:text-white">
-        <div className="w-48 dark:bg-gray-700">
+        <div className="w-48 shadow dark:bg-gray-700">
           <ul>
             <li className="px-4 py-2 hover:bg-gray-500">
               <Link to="kanban">
@@ -22,11 +21,11 @@ export const ProjectScreen = () => {
             </li>
           </ul>
         </div>
-        <div className="dark:bg-gray-500 h-full w-full">
-          <span>thiskd</span>
+        <div className="w-full h-full p-2 ml-3 shadow dark:bg-gray-700">
           <Routes>
             <Route path="/kanban" element={<KanbanScreen />} />
             <Route path="/epic" element={<EpicScreen />} />
+            <Navigate to={window.location.pathname + "/kanban"} />
           </Routes>
         </div>
       </div>
