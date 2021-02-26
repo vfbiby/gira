@@ -16,12 +16,13 @@ export interface ProjectProps {
 }
 
 export const ProjectsListScreen = () => {
-  const [projectsParams, setParam] = useProjectsSearchParams();
-  const { debouncedValue } = useDebounce(projectsParams, 500);
-  const { data: users } = useUsers();
-  const { data: projects, isLoading } = useProjects(debouncedValue);
-
   useDocumentTitle("项目列表");
+
+  const { data: users } = useUsers();
+  const [projectsParams, setParam] = useProjectsSearchParams();
+  const { data: projects, isLoading } = useProjects(
+    useDebounce(projectsParams, 500)
+  );
 
   return (
     <div className="rounded dark:text-white">
@@ -43,4 +44,4 @@ export const ProjectsListScreen = () => {
     </div>
   );
 };
-ProjectsListScreen.whyDidYouRender = true;
+ProjectsListScreen.whyDidYouRender = false;
