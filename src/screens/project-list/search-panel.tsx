@@ -25,7 +25,7 @@ export const SearchPanel = ({ users, param, setParam }: SearchProps) => {
               name: e.target.value,
             });
           }}
-          className="px-4 text-pink-600 border border-gray-200 rounded dark:bg-gray-900"
+          className="px-4 text-pink-600 placeholder-pink-300 border border-gray-200 rounded dark:bg-gray-900"
           type="text"
           name="name"
         />

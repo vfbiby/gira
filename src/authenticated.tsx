@@ -7,7 +7,7 @@ import {
   LinkProps,
   useMatch,
 } from "react-router-dom";
-import { HomeScreen } from "screens/Home";
+import { HomeScreen } from "screens/home";
 import { ProjectScreen } from "screens/project";
 import { ProjectsListScreen } from "screens/project-list";
 import { useDarkTheme } from "./context/dark-context";
