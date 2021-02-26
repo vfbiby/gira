@@ -37,7 +37,10 @@ export const ProjectsList = ({
                   {project.organization}
                 </td>
                 <td className="px-4 py-2 border border-blue-500">
-                  {users?.find(({ id }) => id === project.personId)?.name}
+                  {
+                    users?.find(({ id }) => id === Number(project.personId))
+                      ?.name
+                  }
                 </td>
                 <td className="px-4 py-2 border border-blue-500">
                   {project.created

@@ -3,22 +3,24 @@ import { useDebounce } from "utils/use-debounce";
 import { useDocumentTitle } from "utils/use-documentTitle";
 import { useProjects } from "utils/use-projects";
 import { useUsers } from "utils/use-users";
+import { useUrlQueryParam } from "utils/useUrlQueryParam";
 import { ProjectsList } from "./list";
 import { SearchPanel } from "./search-panel";
 
 export interface ProjectProps {
   id: number;
   name: string;
-  personId: number;
+  personId: string;
   organization: string;
   created: number;
 }
 
 export const ProjectsListScreen = () => {
-  const [param, setParam] = useState({
+  const [, setParam] = useState({
     name: "",
-    personId: 0,
+    personId: "",
   });
+  const [param] = useUrlQueryParam(["name", "personId"]);
   const { debouncedValue } = useDebounce(param, 500);
   const { data: users } = useUsers();
   const { data: projects, isLoading } = useProjects(debouncedValue);

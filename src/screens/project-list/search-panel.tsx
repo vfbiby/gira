@@ -7,7 +7,7 @@ interface SearchProps {
   users: User[];
   param: {
     name: string;
-    personId: number;
+    personId: string;
   };
   setParam: (param: SearchProps["param"]) => void;
 }
@@ -37,7 +37,7 @@ export const SearchPanel = ({ users, param, setParam }: SearchProps) => {
           onChange={(e) => {
             setParam({
               ...param,
-              personId: Number(e.target.value),
+              personId: e.target.value,
             });
           }}
           name="personId"
