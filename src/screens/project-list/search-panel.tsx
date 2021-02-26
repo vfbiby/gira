@@ -1,3 +1,5 @@
+import { ProjectProps } from ".";
+
 export interface User {
   id: number;
   name: string;
@@ -5,10 +7,7 @@ export interface User {
 
 interface SearchProps {
   users: User[];
-  param: {
-    name: string;
-    personId: string;
-  };
+  param: Partial<Pick<ProjectProps, "name" | "personId">>;
   setParam: (param: SearchProps["param"]) => void;
 }
 
@@ -37,7 +36,7 @@ export const SearchPanel = ({ users, param, setParam }: SearchProps) => {
           onChange={(e) => {
             setParam({
               ...param,
-              personId: e.target.value,
+              personId: Number(e.target.value),
             });
           }}
           name="personId"
