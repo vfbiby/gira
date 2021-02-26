@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDebounce } from "utils/use-debounce";
 import { useDocumentTitle } from "utils/use-documentTitle";
 import { useProjects } from "utils/use-projects";
@@ -16,11 +16,11 @@ export interface ProjectProps {
 }
 
 export const ProjectsListScreen = () => {
-  const [, setParam] = useState({
-    name: "",
-    personId: "",
-  });
-  const [param] = useUrlQueryParam(["name", "personId"]);
+  //const [, setParam] = useState({
+  //name: "",
+  //personId: "",
+  //});
+  const [param, setParam] = useUrlQueryParam(["name", "personId"]);
   const { debouncedValue } = useDebounce(param, 500);
   const { data: users } = useUsers();
   const { data: projects, isLoading } = useProjects(debouncedValue);
@@ -43,4 +43,3 @@ export const ProjectsListScreen = () => {
     </div>
   );
 };
-ProjectsListScreen.whyDidYouRender = true;
