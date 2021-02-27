@@ -30,4 +30,4 @@ export const IdSelect = (props: IdSelectProps) => {
   );
 };
 
-const toNumber = (value: unknown) => (isNaN(Number(value)) ? 0 : Number(value));
+export const toNumber = (value: unknown) => (isNaN(Number(value)) ? 0 : Number(value));
