@@ -51,6 +51,17 @@ export const SearchPanel = ({ users, param, setParam }: SearchProps) => {
             );
           })}
         </select>
+        <UserSelect
+          className="w-32 px-4 ml-2 text-pink-600 border border-gray-200 rounded dark:bg-gray-900"
+          defaultOptionName="负责人"
+          value={param.personId}
+          onChange={(value) => {
+            setParam({
+              ...param,
+              personId: value,
+            });
+          }}
+        />
       </div>
     </form>
   );

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { useDebounce } from "utils/use-debounce";
 import { useDocumentTitle } from "utils/use-documentTitle";
 import { useProjects } from "utils/use-projects";
