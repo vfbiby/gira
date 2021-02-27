@@ -21,7 +21,7 @@ export const HomeScreen = () => {
           },
           {
             id: 2,
-            name: "bb",
+            name: "tt",
           },
         ]}
         onChange={(value) => {
