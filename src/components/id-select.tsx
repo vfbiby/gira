@@ -2,12 +2,15 @@ import { Raw } from "types";
 
 //type SelectProps = React.ComponentProps<typeof select>;
 
-interface IdSelectProps {
+interface IdSelectProps
+  extends Omit<
+    React.SelectHTMLAttributes<HTMLSelectElement>,
+    "value" | "onChange"
+  > {
   value: Raw | null | undefined;
   onChange: (value?: number) => void;
   defaultOptionName?: string;
   options?: { name: string; id: number }[];
-  className?: string;
 }
 
 export const IdSelect = (props: IdSelectProps) => {
@@ -30,4 +33,5 @@ export const IdSelect = (props: IdSelectProps) => {
   );
 };
 
-export const toNumber = (value: unknown) => (isNaN(Number(value)) ? 0 : Number(value));
+export const toNumber = (value: unknown) =>
+  isNaN(Number(value)) ? 0 : Number(value);
