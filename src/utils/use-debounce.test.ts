@@ -10,7 +10,7 @@ describe("useDebounce", () => {
         initialProps: { value: "first", delay: 500 },
       }
     );
-    expect(result.current.debouncedValue).toBe("first");
+    expect(result.current).toBe("first");
   });
 
   it("should return last value when assign value many times", async () => {
@@ -23,6 +23,6 @@ describe("useDebounce", () => {
     rerender({ value: "second", delay: 500 });
     rerender({ value: "three", delay: 500 });
     await waitForNextUpdate();
-    expect(result.current.debouncedValue).toBe("three");
+    expect(result.current).toBe("three");
   });
 });
