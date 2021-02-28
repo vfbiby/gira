@@ -1,6 +1,6 @@
-import {IconPin} from "components/icon/icon-pin";
-import IconStar from "components/iconfont/IconStar";
+import { IconPin } from "components/icon/icon-pin";
 import { IdSelect } from "components/id-select";
+import { Pin } from "components/pin";
 import React, { useState } from "react";
 import { useDocumentTitle } from "utils/use-documentTitle";
 
@@ -34,8 +34,8 @@ export const HomeScreen = () => {
           }
         }}
       />
-      <IconStar className="text-pink-500 fill-current" color="gray" size={40} />
       <IconPin className="w-12 h-12 text-pink-300 fill-current dark:text-gray-600" />
+      <Pin className="w-8 h-8" checked={true} />
     </div>
   );
 };
