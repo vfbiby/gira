@@ -35,7 +35,11 @@ export const ProjectsList = ({
           {projects?.map((project) => {
             return (
               <tr key={project.id} className="">
-                <td className="px-4 py-2 border border-blue-500"></td>
+                <td className="px-4 py-2 border border-blue-500">
+                  <div className="flex items-center justify-center">
+                    <Pin checked={false} className="w-8 h-8" />
+                  </div>
+                </td>
                 <td className="px-4 py-2 border border-blue-500">
                   <Link to={`${project.id}`}>{project.name}</Link>
                 </td>
