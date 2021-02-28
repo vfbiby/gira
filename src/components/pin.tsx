@@ -4,12 +4,19 @@ import { IconPin } from "./icon/icon-pin";
 interface PinProps {
   checked: boolean;
   className?: string;
+  disabled?: boolean;
   onChange?: (isChecked: boolean) => void;
 }
 
-export const Pin = ({ checked, onChange, ...restProps }: PinProps) => {
+export const Pin = ({
+  checked,
+  onChange,
+  disabled,
+  ...restProps
+}: PinProps) => {
   const [isChecked, toggleChecked] = useState(checked);
   const handleToggle = () => {
+    if (disabled) return;
     if (onChange) onChange(isChecked);
     toggleChecked(!isChecked);
   };

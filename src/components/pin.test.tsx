@@ -49,4 +49,21 @@ describe("Pin", () => {
     expect(onChange).toHaveBeenCalledWith(false);
   })
 
+  it("should be inactive when set to disabled", function(){
+    const onChange = jest.fn().mockImplementation(()=>{});
+    const { container } = render(<Pin checked={false} disabled={true} onChange={onChange} />);
+
+    expect(container.querySelector("svg")?.classList).not.toContain(
+      "text-yellow-200"
+    );
+
+    fireEvent.click(container.querySelector("svg") as Element);
+
+    expect(onChange).toHaveBeenCalledTimes(0);
+    expect(onChange).not.toHaveBeenCalled();
+    expect(container.querySelector("svg")?.classList).not.toContain(
+      "text-yellow-200"
+    );
+  })
+
 });
