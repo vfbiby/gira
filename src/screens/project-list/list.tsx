@@ -37,7 +37,7 @@ export const ProjectsList = ({
               <tr key={project.id} className="">
                 <td className="px-4 py-2 border border-blue-500">
                   <div className="flex items-center justify-center">
-                    <Pin checked={false} className="w-8 h-8" />
+                    <Pin checked={project.pin} className="w-8 h-8" />
                   </div>
                 </td>
                 <td className="px-4 py-2 border border-blue-500">
