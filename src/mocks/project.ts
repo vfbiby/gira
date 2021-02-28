@@ -1,6 +1,6 @@
 import { rest } from "msw";
 
-let projects = [
+const projects = [
   {
     id: 1,
     name: "骑手管理",
