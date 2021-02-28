@@ -25,8 +25,8 @@ export const Pin = ({
     <div {...restProps} onClick={handleToggle}>
       <IconPin
         className={
-          `${isChecked ? "text-yellow-200" : ""} ` +
-          "fill-current w-full h-full"
+          `${isChecked ? "text-yellow-200 dark:text-yellow-200" : ""} ` +
+          "fill-current w-full h-full text-gray-300 dark:text-gray-600"
         }
       />
     </div>
