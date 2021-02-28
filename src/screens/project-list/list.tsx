@@ -1,5 +1,5 @@
-import { IconPin } from "components/icon/icon-pin";
 import { PageLoading } from "components/page-loading";
+import { Pin } from "components/pin";
 import dayjs from "dayjs";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -22,7 +22,7 @@ export const ProjectsList = ({
         <thead>
           <tr className="px-4 py-2 text-lg font-bold text-center">
             <td className="flex items-center justify-center px-4 py-2">
-              <IconPin className="block w-8 h-8 text-gray-400 fill-current dark:text-gray-600" />
+              <Pin checked={true} disabled={true} className="w-8 h-8" />
             </td>
             <td className="w-1/5 px-4 py-2">名称</td>
             <td className="w-1/5 px-4 py-2">部门</td>
