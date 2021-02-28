@@ -4,7 +4,7 @@ import { useAuth } from "./hooks";
 export const useClient = () => {
   const { user } = useAuth();
 
-  return (url: string) => {
-    client(url, { token: user?.token });
+  return (...[url, config]: Parameters<typeof client>) => {
+    client(url, { ...config, token: user?.token });
   };
 };
