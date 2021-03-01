@@ -17,6 +17,7 @@ export const ProjectsList = ({
   isLoading: boolean;
 }) => {
   const { mutate } = useEditProject();
+  const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin });
   return (
     <div className="relative">
       <PageLoading isLoading={isLoading} />
@@ -41,9 +42,7 @@ export const ProjectsList = ({
                   <div className="flex items-center justify-center">
                     <Pin
                       checked={project.pin}
-                      onChange={(pin) => {
-                        mutate({ id: project.id, pin });
-                      }}
+                      onChange={pinProject(project.id)}
                       className="w-8 h-8"
                     />
                   </div>
