@@ -1,9 +1,10 @@
 import { rest } from "msw";
-import { projects } from "./projects";
+import { ls } from "utils/ls-client";
 
 export const projectHandlers = [
   rest.get("/projects/:projectId", (req, res, ctx) => {
     let { projectId } = req.params;
+    const projects = ls.get("projects");
     return res(
       ctx.delay(),
       ctx.json((projectId -= 1) > 0 ? projects[Number(projectId)] : projects[0])
@@ -22,6 +23,8 @@ export const projectHandlers = [
         })
       );
     }
+
+    const projects = ls.get("projects");
 
     projects[Number(projectId) - 1] = {
       ...projects[Number(projectId) - 1],

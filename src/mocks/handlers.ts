@@ -1,7 +1,10 @@
 // src/mocks/handlers.js
 import { rest } from "msw";
+import { init_mock_data } from "./init-data";
 import { projectHandlers } from "./project";
 import { projectsHandlers } from "./projects";
+
+init_mock_data();
 
 interface LoginBody {
   username: string;
