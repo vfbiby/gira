@@ -11,4 +11,11 @@ describe("localStorage", () => {
     ls.set("test-object", { user: { name: "vf" } });
     expect(ls.get("test-object")).toEqual({ user: { name: "vf" } });
   });
+
+  it("can removeItem", function () {
+    ls.set("testRemove", "true");
+    expect(ls.get("testRemove")).toBe(true);
+    ls.remove("testRemove");
+    expect(ls.get("testRemove")).toBe(null);
+  });
 });

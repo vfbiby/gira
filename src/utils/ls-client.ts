@@ -13,6 +13,9 @@ export const ls = {
       return localStorage.getItem(key);
     }
   },
+  remove(key: string) {
+    localStorage.removeItem(key);
+  },
   clear() {
     localStorage.clear();
   },
