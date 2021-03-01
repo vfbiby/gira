@@ -1,8 +1,9 @@
+import { localStorageKey } from "auth-provider";
+import { ls } from "./ls-client";
+
 describe("localStorage", () => {
   it("can save data", () => {
-    window.localStorage.setItem("__auth_provider_token", "valid-token");
-    expect(window.localStorage.getItem("__auth_provider_token")).toBe(
-      "valid-token"
-    );
+    ls.set(localStorageKey, "valid-token");
+    expect(ls.get(localStorageKey)).toBe("valid-token");
   });
 });
