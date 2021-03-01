@@ -1,8 +1,19 @@
 export const ls = {
   set(key: string, value: any) {
-    localStorage.setItem(key, value);
+    if (typeof value === "object") {
+      localStorage.setItem(key, JSON.stringify(value));
+    } else {
+      localStorage.setItem(key, value);
+    }
   },
   get(key: string) {
-    return localStorage.getItem(key);
+    try {
+      return JSON.parse(localStorage.getItem(key) || "");
+    } catch (e) {
+      return localStorage.getItem(key);
+    }
+  },
+  clear() {
+    localStorage.clear();
   },
 };
