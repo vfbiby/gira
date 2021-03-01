@@ -66,5 +66,6 @@ export const init_source_data = {
 export const init_mock_data = () => {
   if (ls.get("data_inited")) return;
   ls.set("projects", JSON.stringify(init_source_data.projects));
+  ls.set("users", JSON.stringify(init_source_data.users));
   ls.set("data_inited", "true");
 };

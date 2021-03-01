@@ -16,4 +16,15 @@ describe("Init mock data", () => {
     init_mock_data();
     expect(ls.get("projects")).toStrictEqual(null);
   });
+
+  it("should init user data", function () {
+    expect(ls.get("users")).toStrictEqual(null);
+    init_mock_data();
+    expect(ls.get("users")).toStrictEqual([
+      { id: 1, name: "高修文" },
+      { id: 2, name: "熊天成" },
+      { id: 3, name: "郑华" },
+      { id: 4, name: "王文静" },
+    ]);
+  });
 });
