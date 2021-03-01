@@ -13,16 +13,16 @@ describe("Projects Mock Server", () => {
       created: 1604989757139,
     });
 
-    const responseProject = await client("/projects/3", {
+    await client("/projects/3", {
       method: "PATCH",
       data: {
         pin: true,
       },
     });
 
-    //project_3 = await client("/projects/3").then();
+    project_3 = await client("/projects/3").then();
 
-    expect(responseProject).toStrictEqual({
+    expect(project_3).toStrictEqual({
       id: 3,
       name: "物料管理系统",
       personId: 2,

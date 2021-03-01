@@ -31,9 +31,11 @@ export const projectHandlers = [
       ...(req.body as Record<string, any>),
     };
 
+    ls.set("projects", projects);
+
     return res(
       ctx.json({
-        ...projects[Number(projectId) - 1],
+        projects: ls.get("projects")[Number(projectId) - 1],
       })
     );
   }),
