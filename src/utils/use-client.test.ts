@@ -5,7 +5,7 @@ import { useAuth } from "./hooks";
 import { mocked } from "ts-jest/utils";
 
 jest.mock("./hooks");
-jest.spyOn(Http, "client");
+const spyClient = jest.spyOn(Http, "client");
 
 describe("useClient", () => {
   beforeEach(() => {
@@ -93,6 +93,19 @@ describe("useClient", () => {
 
     expect(Http.client).toHaveBeenCalledWith("/me", {
       token: "second-token",
+    });
+  });
+
+  it("should get response when call returned client", async function () {
+    spyClient.mockRestore();
+    const { result } = renderHook(() => useClient());
+    const resPromise = result.current("/me").then();
+
+    expect(await resPromise).toStrictEqual({
+      email: "3432@qq.com",
+      id: 1,
+      name: "bb",
+      token: "valid-token",
     });
   });
 });
