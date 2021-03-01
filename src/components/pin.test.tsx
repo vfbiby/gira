@@ -48,7 +48,7 @@ describe("Pin", () => {
 
     fireEvent.click(container.querySelector("svg") as Element);
     expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toHaveBeenCalledWith(false);
+    expect(onChange).toHaveBeenCalledWith(true);
   });
 
   it("should be inactive when set to disabled", () => {

@@ -17,7 +17,7 @@ export const Pin = ({
   const [isChecked, toggleChecked] = useState(checked);
   const handleToggle = () => {
     if (disabled) return;
-    if (onChange) onChange(isChecked);
+    if (onChange) onChange(!isChecked);
     toggleChecked(!isChecked);
   };
 
