@@ -1,21 +1,14 @@
-import { useEffect } from "react";
+import { useQuery } from "react-query";
 import { ProjectProps } from "screens/project-list";
-import { client } from "./api-client";
-import { cleanObject } from "./clean-object";
 import { useAsync } from "./use-async";
 import { useClient } from "./use-client";
 
 export const useProjects = (param?: Partial<ProjectProps>) => {
-  const { run, ...rest } = useAsync<ProjectProps[] | null>();
+  const client = useClient();
 
-  const fetchProjects = () =>
-    client("/projects", { data: cleanObject(param || {}) });
-
-  useEffect(() => {
-    run(fetchProjects(), { retry: fetchProjects });
-  }, [param]);
-
-  return rest;
+  return useQuery(["projects", param], () =>
+    client("/projects", { data: param })
+  );
 };
 
 export const useEditProject = () => {

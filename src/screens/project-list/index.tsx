@@ -22,7 +22,7 @@ export const ProjectsListScreen = () => {
 
   const { data: users } = useUsers();
   const [projectsParams, setParam] = useProjectsSearchParams();
-  const { data: projects, isLoading, retry } = useProjects(
+  const { data: projects, isLoading } = useProjects(
     useDebounce(projectsParams, 500)
   );
   const { open } = useProjectModal();
@@ -46,7 +46,6 @@ export const ProjectsListScreen = () => {
       </div>
       <div className="p-10 mt-2 bg-blue-100 rounded-t-xl dark:bg-gray-800 ">
         <ProjectsList
-          refresh={retry}
           isLoading={isLoading}
           users={users}
           projects={projects}
