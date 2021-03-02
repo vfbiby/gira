@@ -8,8 +8,11 @@ import { useClient } from "./use-client";
 export const useProjects = (param?: Partial<ProjectProps>) => {
   const { run, ...rest } = useAsync<ProjectProps[] | null>();
 
+  const fetchProjects = () =>
+    client("/projects", { data: cleanObject(param || {}) });
+
   useEffect(() => {
-    run(client("/projects", { data: cleanObject(param || {}) }));
+    run(fetchProjects(), { retry: fetchProjects });
   }, [param]);
 
   return rest;

@@ -7,6 +7,7 @@ export function useAsync<D>() {
     "idle" | "pending" | "success" | "error"
   >("idle");
   const [error, setStateError] = useState<Error | null>(null);
+  const [retry, setRetry] = useState(() => () => {});
   const mountedRef = useMountedRef();
 
   const setData = (data: D) => {
@@ -23,8 +24,13 @@ export function useAsync<D>() {
 
   const run = async (
     promise: Promise<D>,
-    config?: { throwOnError: boolean }
+    config?: { throwOnError?: boolean; retry?: () => Promise<D> }
   ): Promise<any> => {
+    setRetry(() => () => {
+      if (config?.retry) {
+        run(config?.retry(), config);
+      }
+    });
     setStatus("pending");
 
     return promise
@@ -53,5 +59,6 @@ export function useAsync<D>() {
     run,
     setData,
     setError,
+    retry,
   };
 }

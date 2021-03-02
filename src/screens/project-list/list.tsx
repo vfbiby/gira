@@ -11,13 +11,16 @@ export const ProjectsList = ({
   projects,
   users,
   isLoading,
+  ...props
 }: {
   projects: ProjectProps[] | null;
   users: User[] | null;
   isLoading: boolean;
+  refresh?: () => void;
 }) => {
   const { mutate } = useEditProject();
-  const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin });
+  const pinProject = (id: number) => (pin: boolean) =>
+    mutate({ id, pin }).then(props.refresh);
   return (
     <div className="relative">
       <PageLoading isLoading={isLoading} />

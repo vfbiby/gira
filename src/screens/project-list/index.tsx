@@ -21,7 +21,7 @@ export const ProjectsListScreen = () => {
 
   const { data: users } = useUsers();
   const [projectsParams, setParam] = useProjectsSearchParams();
-  const { data: projects, isLoading } = useProjects(
+  const { data: projects, isLoading, retry } = useProjects(
     useDebounce(projectsParams, 500)
   );
 
@@ -40,7 +40,7 @@ export const ProjectsListScreen = () => {
         </div>
       </div>
       <div className="p-10 mt-2 bg-blue-100 rounded-t-xl dark:bg-gray-800 ">
-        <ProjectsList isLoading={isLoading} users={users} projects={projects} />
+        <ProjectsList refresh={retry} isLoading={isLoading} users={users} projects={projects} />
       </div>
     </div>
   );
