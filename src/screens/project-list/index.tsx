@@ -39,17 +39,16 @@ export const ProjectsListScreen = () => {
             setParam={setParam}
             users={users || []}
           />
-          <div className="dark:text-white" onClick={open}>
-            create project
-          </div>
+          <button
+            className="px-4 py-2 uppercase bg-gray-300 rounded focus:outline-none dark:text-white"
+            onClick={open}
+          >
+            Create project
+          </button>
         </div>
       </div>
       <div className="p-10 mt-2 bg-blue-100 rounded-t-xl dark:bg-gray-800 ">
-        <ProjectsList
-          isLoading={isLoading}
-          users={users}
-          projects={projects}
-        />
+        <ProjectsList isLoading={isLoading} users={users} projects={projects} />
       </div>
       <ProjectModel />
     </div>

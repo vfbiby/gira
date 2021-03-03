@@ -25,7 +25,7 @@ export const ProjectModel = () => {
             ) : (
               <div>
                 <h1 className="text-5xl font-semibold">{title}</h1>
-                <ProjectForm editingProject={editingProject} />
+                <ProjectForm close={close} editingProject={editingProject} />
               </div>
             )}
             <button className="absolute top-2 right-3" onClick={close}>

@@ -8,19 +8,29 @@ interface CreateProjectProps extends Partial<ProjectProps> {}
 
 export const ProjectForm = ({
   editingProject,
+  close,
 }: {
   editingProject?: ProjectProps;
+  close?: () => void;
 }) => {
   const {
     register,
     handleSubmit,
     errors,
     control,
+    reset,
   } = useForm<CreateProjectProps>();
   const useMutateProject = editingProject ? useEditProject : useAddProject;
   const { mutateAsync, error, isLoading: mutateLoading } = useMutateProject();
   const onSubmit = async (data: CreateProjectProps) => {
-    mutateAsync({ ...editingProject, ...data });
+    mutateAsync({ ...editingProject, ...data }).then(() => {
+      reset({
+        name: "",
+        organization: "",
+        personId: 0,
+      });
+      close?.();
+    });
   };
 
   return (
