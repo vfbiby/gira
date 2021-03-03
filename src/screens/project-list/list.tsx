@@ -31,7 +31,7 @@ export const ProjectsList = ({
             <td className="w-1/5 px-4 py-2">部门</td>
             <td className="w-1/5 px-4 py-2">负责人</td>
             <td className="w-1/5 px-4 py-2">创建时间</td>
-            <td className="px-4 py-2"></td>
+            <td className="px-4 py-2">操作</td>
           </tr>
         </thead>
         <tbody>
@@ -63,6 +63,12 @@ export const ProjectsList = ({
                   {project.created
                     ? dayjs(project.created).format("YYYY-MM-DD")
                     : "null"}
+                </td>
+                <td className="px-4 py-2 text-center border border-blue-500">
+                  <div>
+                    <button className="px-2 py-1 bg-blue-300 rounded-lg focus:outline-none dark:bg-gray-700">Edit</button>
+                    <button className="px-2 py-1 ml-2 bg-blue-300 rounded-lg focus:outline-none dark:bg-gray-700">Delete</button>
+                  </div>
                 </td>
               </tr>
             );
