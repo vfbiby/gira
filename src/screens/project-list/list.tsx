@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useEditProject } from "utils/use-projects";
 import { ProjectProps } from ".";
 import { User } from "./search-panel";
+import { useProjectModal } from "./utils";
 
 export const ProjectsList = ({
   projects,
@@ -18,6 +19,8 @@ export const ProjectsList = ({
 }) => {
   const { mutate } = useEditProject();
   const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin });
+  const { startEdit } = useProjectModal();
+
   return (
     <div className="relative">
       <PageLoading isLoading={isLoading} />
@@ -64,10 +67,17 @@ export const ProjectsList = ({
                     ? dayjs(project.created).format("YYYY-MM-DD")
                     : "null"}
                 </td>
-                <td className="px-4 py-2 text-center border border-blue-500">
+                <td className="px-2 py-2 text-center border border-blue-500">
                   <div>
-                    <button className="px-2 py-1 bg-blue-300 rounded-lg focus:outline-none dark:bg-gray-700">Edit</button>
-                    <button className="px-2 py-1 ml-2 bg-blue-300 rounded-lg focus:outline-none dark:bg-gray-700">Delete</button>
+                    <button
+                      onClick={() => startEdit(project.id)}
+                      className="px-2 py-1 bg-blue-300 rounded-lg focus:outline-none dark:bg-gray-700"
+                    >
+                      Edit
+                    </button>
+                    <button className="px-2 py-1 ml-2 bg-blue-300 rounded-lg focus:outline-none dark:bg-gray-700">
+                      Delete
+                    </button>
                   </div>
                 </td>
               </tr>

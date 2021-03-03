@@ -41,3 +41,15 @@ export const useAddProject = () => {
     }
   );
 };
+
+export const useProject = (id?: number) => {
+  const client = useClient();
+
+  return useQuery<ProjectProps>(
+    ["project", { id }],
+    () => client(`projects/${id}`),
+    {
+      enabled: Boolean(id),
+    }
+  );
+};

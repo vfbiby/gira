@@ -7,8 +7,8 @@ interface IdSelectProps
     React.SelectHTMLAttributes<HTMLSelectElement>,
     "value" | "onChange"
   > {
-  value: Raw | null | undefined;
-  onChange: (value?: number) => void;
+  value?: Raw | null | undefined;
+  onChange?: (value?: number) => void;
   defaultOptionName?: string;
   options?: { name: string; id: number }[];
 }
@@ -18,7 +18,7 @@ export const IdSelect = (props: IdSelectProps) => {
   return (
     <select
       value={options?.length ? toNumber(value) : 0}
-      onChange={(e) => onChange(toNumber(e.target.value) || undefined)}
+      onChange={(e) => onChange?.(toNumber(e.target.value) || undefined)}
       {...restProps}
     >
       {defaultOptionName ? (
