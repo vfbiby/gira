@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { ProjectProps } from "screens/project-list";
 import { useAsync } from "./use-async";
 import { useClient } from "./use-client";
@@ -12,19 +12,17 @@ export const useProjects = (param?: Partial<ProjectProps>) => {
 };
 
 export const useEditProject = () => {
-  const { run, ...rest } = useAsync();
   const client = useClient();
-  const mutate = (params: Partial<ProjectProps>) => {
-    return run(
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    (params: Partial<ProjectProps>) =>
       client(`projects/${params.id}`, {
         method: "PATCH",
         data: params,
-      })
-    );
-  };
-
-  return {
-    mutate,
-    ...rest,
-  };
+      }),
+    {
+      onSuccess: () => queryClient.invalidateQueries("projects"),
+    }
+  );
 };
