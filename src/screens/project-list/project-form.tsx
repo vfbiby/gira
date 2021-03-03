@@ -1,6 +1,6 @@
 import { UserSelect } from "components/user-select";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useAddProject, useEditProject } from "utils/use-projects";
 import { ProjectProps } from ".";
 
@@ -11,7 +11,12 @@ export const ProjectForm = ({
 }: {
   editingProject?: ProjectProps;
 }) => {
-  const { register, handleSubmit, errors } = useForm<CreateProjectProps>();
+  const {
+    register,
+    handleSubmit,
+    errors,
+    control,
+  } = useForm<CreateProjectProps>();
   const useMutateProject = editingProject ? useEditProject : useAddProject;
   const { mutateAsync, error, isLoading: mutateLoading } = useMutateProject();
   const onSubmit = async (data: CreateProjectProps) => {
@@ -30,6 +35,7 @@ export const ProjectForm = ({
         <input
           className="w-full px-4 py-2 text-pink-500 rounded bg-gray-50"
           type="text"
+          defaultValue={editingProject?.name}
           name="name"
           ref={register({ required: true })}
         />
@@ -49,6 +55,7 @@ export const ProjectForm = ({
         <input
           className="w-full px-4 py-2 text-pink-500 rounded bg-gray-50"
           type="text"
+          defaultValue={editingProject?.organization}
           name="organization"
           ref={register({ required: true })}
         />
@@ -60,10 +67,17 @@ export const ProjectForm = ({
       </div>
 
       <div className="flex flex-col mt-2">
-        <UserSelect
-          className="w-32 px-4 ml-2 text-pink-600 border border-gray-200 rounded dark:bg-gray-900"
-          defaultOptionName="负责人"
+        <Controller
+          as={
+            <UserSelect
+              className="w-32 px-4 ml-2 text-pink-600 border border-gray-200 rounded dark:bg-gray-900"
+              defaultOptionName="负责人"
+              value={editingProject?.personId}
+            />
+          }
+          defaultValue={editingProject?.personId}
           name="personId"
+          control={control}
         />
       </div>
 
