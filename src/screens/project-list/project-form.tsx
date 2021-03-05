@@ -23,6 +23,7 @@ export const ProjectForm = ({
   const useMutateProject = editingProject ? useEditProject : useAddProject;
   const { mutateAsync, error, isLoading: mutateLoading } = useMutateProject();
   const onSubmit = async (data: CreateProjectProps) => {
+    console.log(data);
     mutateAsync({ ...editingProject, ...data }).then(() => {
       reset({
         name: "",
@@ -78,13 +79,14 @@ export const ProjectForm = ({
 
       <div className="flex flex-col mt-2">
         <Controller
-          as={
+          render={({ value, onChange }) => (
             <UserSelect
               className="w-32 px-4 ml-2 text-pink-600 border border-gray-200 rounded dark:bg-gray-900"
               defaultOptionName="负责人"
-              value={editingProject?.personId}
+              value={value}
+              onChange={onChange}
             />
-          }
+          )}
           defaultValue={editingProject?.personId}
           name="personId"
           control={control}
